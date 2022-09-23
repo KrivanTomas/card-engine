@@ -5,6 +5,9 @@ A card games focused framework/game in unity
 
 🚫 This project is at it's initial state 🚫
 
+## Tools
+- Unity 2021.3.8f1
+
 ## Amber.dev
 - [Tomáš Křivan](https://github.com/KrivanTomas) - Lead developer 
 - [Lukáš Kurtin](https://github.com/kurtinl) - Developer 
