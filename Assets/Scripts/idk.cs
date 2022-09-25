@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class idk : MonoBehaviour
 {
@@ -18,11 +19,13 @@ public class idk : MonoBehaviour
         Ray mouseRay = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(mouseRay, out hit, 50f, 1 << LayerMask.NameToLayer("Card"))){
-            hit.collider.gameObject.GetComponent<CardBehavior>().select();
-            if(lastCard != null && lastCard != hit.collider.gameObject){
-                lastCard.GetComponent<CardBehavior>().unselect();
+            ClassicCardScript ccs = hit.collider.gameObject.GetComponent<ClassicCardScript>();
+            if (!ccs.Initialized)
+            {
+                ccs.CcObject = (ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/KINGOFHEARTS.asset", typeof(ClassicCardObject));
+                ccs.InitProperties();
+                print("A");
             }
-            lastCard = hit.collider.gameObject;
         }
         else if(lastCard != null){
             lastCard.GetComponent<CardBehavior>().unselect();
