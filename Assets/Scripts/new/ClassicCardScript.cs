@@ -18,11 +18,9 @@ public class ClassicCardScript : MonoBehaviour
     
     private Vector3 currentAreaAssignedPosition;
     private Vector3 nextAreaAssignedPosition;
-    private Vector3 lastPosition;
 
     private Quaternion currentAreaAssignedRotation; 
     private Quaternion nextAreaAssignedRotation;
-    private Quaternion lastRotation;
 
     public ClassicCardObject.ccValue Card_value { get => card_value; }
     public ClassicCardObject.ccColor Card_color { get => card_color; }
@@ -40,9 +38,6 @@ public class ClassicCardScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lastPosition = transform.position;
-        lastRotation = transform.rotation;
-
         InitProperties();
     }
 
@@ -56,10 +51,7 @@ public class ClassicCardScript : MonoBehaviour
             return;
         }
 
-        if(lastPosition == currentAreaAssignedPosition && lastRotation == currentAreaAssignedRotation) return;
-
-        lastPosition = currentAreaAssignedPosition;
-        lastRotation = currentAreaAssignedRotation;
+        if(transform.position == currentAreaAssignedPosition && transform.rotation == currentAreaAssignedRotation) return;
 
         transform.position = currentAreaAssignedPosition;
         transform.rotation = currentAreaAssignedRotation;

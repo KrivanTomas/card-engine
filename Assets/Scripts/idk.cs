@@ -24,7 +24,6 @@ public class idk : MonoBehaviour
             {
                 ccs.CcObject = (ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/KINGOFHEARTS.asset", typeof(ClassicCardObject));
                 ccs.InitProperties();
-                print("A");
             }
         }
         else if(lastCard != null){
