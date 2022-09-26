@@ -7,6 +7,7 @@ A card games focused framework/game in unity
 
 ## Tools
 - Unity 2021.3.8f1
+- Blender 3.3.0
 
 ## Amber.dev
 - [Tomáš Křivan](https://github.com/KrivanTomas) - Lead developer 
