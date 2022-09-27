@@ -7,7 +7,8 @@ public class ClassicCardScript : MonoBehaviour
     private ClassicCardObject.ccValue card_value; // ACE,TWO,THREE,..,TEN,JACK,QUEEN,KING,JOKER
     private ClassicCardObject.ccColor card_color; // BLACK/RED
     private ClassicCardObject.ccSymbol card_symbol; // HEARTS/SPADES/DIAMONDS/CLUBS
-
+    //test
+    private List<ClassicCardObject> card_inList;
 
     private bool updatePosition = true;
     private bool initialized = false;
@@ -21,6 +22,9 @@ public class ClassicCardScript : MonoBehaviour
 
     private Quaternion currentAreaAssignedRotation; 
     private Quaternion nextAreaAssignedRotation;
+
+    //test
+    //which array (table area or hand stack) the card is in
 
     public ClassicCardObject.ccValue Card_value { get => card_value; }
     public ClassicCardObject.ccColor Card_color { get => card_color; }
@@ -39,6 +43,7 @@ public class ClassicCardScript : MonoBehaviour
     void Start()
     {
         InitProperties();
+        
     }
 
     // Update is called once per frame
@@ -63,6 +68,7 @@ public class ClassicCardScript : MonoBehaviour
         card_value = ccObject.card_value;
         card_color = ccObject.card_color;
         card_symbol = ccObject.card_symbol;
+
         gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
     }
@@ -75,5 +81,11 @@ public class ClassicCardScript : MonoBehaviour
         card_symbol = ccObject.card_symbol;
         gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
+    }
+
+    public void SetToArea (GameObject areaObject){
+        ccObject.card_inArea = areaObject;
+        currentAreaAssignedPosition = areaObject.transform.position;
+        currentAreaAssignedRotation = areaObject.transform.rotation;
     }
 }
