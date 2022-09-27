@@ -12,7 +12,6 @@ public class CardAreaScript : MonoBehaviour
     private List<Vector3> cardPositionList;
     private List<Quaternion> cardRotationList;
 
-    public bool a;
     public Vector3 AreaPosition { get => transform.position; set => areaPosition = value; }
     public Quaternion AreaRotation { get => transform.rotation; set => areaRotation = value; }
 
@@ -27,14 +26,14 @@ public class CardAreaScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         areaPosition = transform.position;
     }
 
     public void AddCard(ClassicCardScript newCard){
         //if(cardList == null) cardList[0] = newCard;
-        cardList.Add(newCard);//!!!!!!!!!
+        cardList.Add(newCard);//あばない 
         cardPositionList.Add(areaPosition);             
         cardRotationList.Add(newCard.transform.rotation);
     }
