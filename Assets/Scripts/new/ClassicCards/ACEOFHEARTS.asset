@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ACEOFHEARTS
   m_EditorClassIdentifier: 
   card_value: 0
-  card_color: 0
+  card_color: 1
   card_symbol: 0
-  card_material: {fileID: 0}
+  card_material: {fileID: 2100000, guid: 4089aacf359404a48be1f109139faa68, type: 2}

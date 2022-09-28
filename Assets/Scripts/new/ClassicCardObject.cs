@@ -10,8 +10,6 @@ public class ClassicCardObject : ScriptableObject
     public ccSymbol card_symbol; // HEARTS/SPADES/DIAMONDS/CLUBS
     public Material card_material;
 
-    public GameObject card_inArea;
-
     public enum ccValue {
         ACE,
         TWO,

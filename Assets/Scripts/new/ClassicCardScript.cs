@@ -10,7 +10,7 @@ public class ClassicCardScript : MonoBehaviour
     //test
     private List<ClassicCardObject> card_inList;
 
-    private bool updatePosition = true;
+    private bool updatePosition = false;
     private bool initialized = false;
     private bool animating = false;
 
@@ -84,7 +84,7 @@ public class ClassicCardScript : MonoBehaviour
     }
 
     public void SetToArea (GameObject areaObject){
-        ccObject.card_inArea = areaObject;
+        //wtf is this //ccObject.card_inArea = areaObject;
         currentAreaAssignedPosition = areaObject.transform.position;
         currentAreaAssignedRotation = areaObject.transform.rotation;
     }

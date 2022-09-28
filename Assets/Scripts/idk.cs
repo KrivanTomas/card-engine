@@ -47,8 +47,6 @@ public class idk : MonoBehaviour
             {
                 ccs.CcObject = (ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/KINGOFHEARTS.asset", typeof(ClassicCardObject));
                 ccs.InitProperties();
-                ccs.CurrentAreaAssignedPosition = handAreaScript.AreaPosition;
-                ccs.CurrentAreaAssignedRotation = handAreaScript.AreaRotation;
             }
 
             if(Input.GetKey(KeyCode.Mouse0) && !touchedCard)
