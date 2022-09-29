@@ -11,8 +11,8 @@ A card games focused framework/game in unity
 - VS Code
 
 ## Amber.dev
-- [Tomáš Křivan](https://github.com/KrivanTomas) - Lead developer 
-- [Lukáš Kurtin](https://github.com/KurtinLukas) - Developer 
+- [Tomáš Křivan](https://github.com/KrivanTomas) - Lead developer, Card Developer
+- [Lukáš Kurtin](https://github.com/KurtinLukas) - Developer, Furniture Developer
 
 ## Links
 - Trello [invite](https://trello.com/invite/b/LDxilOwH/5070d90dac6460e89c479a0316817e5c/card-engine)
