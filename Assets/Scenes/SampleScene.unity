@@ -201,6 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f67ebe164bdb2749926d86ee834db1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardWidth: 0
+  cardHeight: 0
   Cards: []
   cardSpace: []
 --- !u!4 &517153996
@@ -471,10 +473,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7053932fd807bb44bb7776f72ef05025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  handAreaScript: {fileID: 1383910049}
-  tableViewObject: {fileID: 764667943}
-  headViewObject: {fileID: 584192470}
-  mttLerpTime: 0
 --- !u!1 &1147004893
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +597,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1ea51c9adec32064cbb96d9f4995b550, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 91e0f630e4635b345ab9f4cdc9c18fe8, type: 2}
     - target: {fileID: 919132149155446097, guid: 1ea51c9adec32064cbb96d9f4995b550, type: 3}
       propertyPath: m_Name
       value: stackIndicator
