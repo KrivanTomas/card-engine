@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 601328788964799485}
   - component: {fileID: 3439815603733825335}
   - component: {fileID: 159226766626925996}
-  m_Layer: 0
+  - component: {fileID: 4349914997377022573}
+  m_Layer: 6
   m_Name: card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +97,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bb765db2e3fde64dbb9ba3227263e55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selected: 0
+  rotation: {x: 0, y: 0, z: 0}
+  offset: 0
+  stackPush: 0
+--- !u!65 &4349914997377022573
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3800002762826655458}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.064, y: 0.088999994, z: 0.00024000386}
+  m_Center: {x: 0, y: 0, z: 0}

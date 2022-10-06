@@ -9,6 +9,7 @@ public class CardAreaScript : MonoBehaviour
     public StackOrigin stackOrigin = StackOrigin.CENTER;
     public CardSpacing cardSpacing = CardSpacing.FROMAREA;
     public bool stableOrigin = false;
+    public string areaType;
 
     public int cardCount;
     public float cardWidth;
@@ -17,13 +18,13 @@ public class CardAreaScript : MonoBehaviour
     [Range(0f,1f)]
     public float totalStacking;
 
+    public bool lineDebug;
     public Material mat;
-    public GameObject aCard;
-    LineRenderer lr;
 
-    public GameObject[] cards;
-    public Vector3[] cardPositions;
+    public List<ClassicCardScript> cards;
 
+    private Vector3[] cardPositions;
+    private LineRenderer lr;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +32,13 @@ public class CardAreaScript : MonoBehaviour
         lr.material = mat;
         lr.startWidth = 0.01f; lr.endWidth = 0.01f;
         lr.startColor = Color.cyan; lr.endColor = Color.magenta;
+        lr.enabled = lineDebug;
     }
 
     // Update is called once per frame
     void Update()
     {
+        cardCount = cards.Count;
         float[] localTransform = new float[cardCount];
         
         Vector3 tempStackDir = new Vector3();
@@ -78,62 +81,28 @@ public class CardAreaScript : MonoBehaviour
         }
 
         //do smth
+        float wtf = 0;
         for(int icard = 0; icard < cardCount; icard++){
-            localTransform[icard] = tempCardSpacing * (icard + tempStableOrigin) * totalStacking + tempStackOrigin * totalStacking;
-        }
+            localTransform[icard] = (tempCardSpacing * (icard + tempStableOrigin)+wtf) * totalStacking + tempStackOrigin * totalStacking;
+            wtf += cards[icard].stackPush;
+        }   
 
         // smth from local space to world space
         cardPositions = new Vector3[cardCount];
         for(int icard = 0; icard < cardCount; icard++){
 
-            cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * 0.00030f * icard );    
+            cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * 0.00030f * icard ); 
+            cards[icard].gameObject.transform.position = cardPositions[icard];// + transform.up * cards[icard].offset; 
+            cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
         }
 
 
 
-
-
-
-
-
-
-        // Set line (debug)
-        lr.positionCount = cardCount;
-        lr.SetPositions(cardPositions);
-
-        // Set cards (debug)
-        if(cardCount != cards.Length){
-            foreach(GameObject card in cards){
-                Destroy(card);
-            }
-            cards = new GameObject[cardCount];
-            for (int i = 0; i < cardCount; i++){
-                cards[i] = Instantiate(aCard);
-                ClassicCardScript ccs = cards[i].GetComponent<ClassicCardScript>();
-                switch(i){
-                    case 0:
-                        ccs.InitProperties((ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/ACEOFHEARTS.asset", typeof(ClassicCardObject)));
-                        break;
-                    case 1:
-                        ccs.InitProperties((ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/TWOOFHEARTS.asset", typeof(ClassicCardObject)));
-                        break;
-                    case 2:
-                        ccs.InitProperties((ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/THREEOFHEARTS.asset", typeof(ClassicCardObject)));
-                        break;
-                    case 3:
-                        ccs.InitProperties((ClassicCardObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/new/ClassicCards/FOUROFHEARTS.asset", typeof(ClassicCardObject)));
-                        break;
-                    default:
-                        break;
-                }
-                
-            }  
-        }
-        
-
-        for (int i = 0; i < cardCount; i++){
-            cards[i].transform.position = cardPositions[i];
-            cards[i].transform.rotation = transform.rotation;
+        //Set line (debug)
+        lr.enabled = lineDebug;
+        if(lineDebug){
+            lr.positionCount = cardCount;
+            lr.SetPositions(cardPositions);
         }
     }
 

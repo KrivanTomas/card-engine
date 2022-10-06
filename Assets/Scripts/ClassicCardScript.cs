@@ -9,7 +9,6 @@ public class ClassicCardScript : MonoBehaviour
     private ClassicCardObject.ccColor card_color; // BLACK/RED
     private ClassicCardObject.ccSymbol card_symbol; // HEARTS/SPADES/DIAMONDS/CLUBS
 
-    private bool updatePosition = false;
     private bool initialized = false;
     private bool animating = false;
 
@@ -22,7 +21,7 @@ public class ClassicCardScript : MonoBehaviour
     private Quaternion currentAreaAssignedRotation; 
     private Quaternion nextAreaAssignedRotation;
 
-    private string card_skins = "Assets\\Cards\\ClassicCards\\SPSTITA\\Materials\\";
+    private string card_skins = "Assets/Cards/ClassicCards/SPSTITA/Materials/";
 
     public ClassicCardObject.ccValue Card_value { get => card_value; }
     public ClassicCardObject.ccColor Card_color { get => card_color; }
@@ -36,28 +35,29 @@ public class ClassicCardScript : MonoBehaviour
     public ClassicCardObject CcObject { get => ccObject; set => ccObject = value; } 
 
     public bool Initialized { get => initialized; }
+    public bool Animating { get => animating; set => animating = value; }
 
+    public bool selected = false;
+    public Vector3 rotation = new Vector3(0f,0f,0f);
+    public float offset = 0f; //should be Vector3 but am dumb (┬┬﹏┬┬) 
+    public float stackPush = 0f;
+
+
+    private BoxCollider boxColl;
     // Start is called before the first frame update
     void Start()
     {
         InitProperties();
-        
+        boxColl = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!initialized || !updatePosition) return;
+        //boxColl.center = -transform.up * offset;
+        if(!initialized || !animating) return;
 
-        if(animating){
-            // animation code
-            return;
-        }
-
-        if(transform.position == currentAreaAssignedPosition && transform.rotation == currentAreaAssignedRotation) return;
-
-        transform.position = currentAreaAssignedPosition;
-        transform.rotation = currentAreaAssignedRotation;
+        // animation code
     }
 
     public void InitProperties () { // Attempts to set the properties from the scriptable object.

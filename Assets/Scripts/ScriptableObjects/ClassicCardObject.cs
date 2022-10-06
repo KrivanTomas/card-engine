@@ -44,7 +44,7 @@ public class ClassicCardObject : ScriptableObject
     private void OnValidate() {
         if(card_value == ccValue.JOKER) {
             card_symbol = ccSymbol.NONE;
-            card_material = "JOKER" + new string[]{"B","R"}[(int)card_color] + ".asset";
+            card_material = "JOKER" + new string[]{"B","R"}[(int)card_color] + ".mat";
             return;
         }
         if(card_symbol == ccSymbol.HEARTS || card_symbol == ccSymbol.DIAMONDS) card_color = ccColor.RED;
@@ -53,6 +53,6 @@ public class ClassicCardObject : ScriptableObject
         string[] val = {"A","2","3","4","5","6","7","8","9","10","J","Q","K","JOKER"};
         string[] sym = {"H","S","D","C","ERROR"};
 
-        card_material = val[(int)card_value] + sym[(int)card_symbol] + ".asset";
+        card_material = val[(int)card_value] + sym[(int)card_symbol] + ".mat";
     }
 }

@@ -5,6 +5,41 @@ using UnityEditor;
 
 public class idk : MonoBehaviour
 {
+
+    Camera cam;
+    ClassicCardScript currccs;
+    ClassicCardScript lastccs;
+
+    private void Start() {
+        cam = GetComponent<Camera>();
+    }
+
+    private void Update() {
+        Ray mouseRay = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if(Physics.Raycast(mouseRay, out hit, 50f, 1 << LayerMask.NameToLayer("Card"))){
+            currccs = hit.collider.gameObject.GetComponent<ClassicCardScript>();
+            if (currccs != lastccs){
+                if(currccs){
+                    if (lastccs){
+                        lastccs.offset = 0f;
+                        lastccs.stackPush = 0f;
+                    }
+                    lastccs = currccs;
+                    currccs.offset = 0.03f;
+                    currccs.stackPush = 0.08f;  
+                } 
+            }
+        }
+        else {
+            if (lastccs){
+                lastccs.offset = 0f;
+                lastccs.stackPush = 0f;
+            }
+        }
+    }
+
 //     [System.NonSerialized]
 //     public CardAreaScript cAreaScript;
 //     public CardAreaScript handAreaScript;
