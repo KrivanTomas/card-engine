@@ -15,4 +15,4 @@ MonoBehaviour:
   card_value: 12
   card_color: 1
   card_symbol: 0
-  card_material: KH.asset
+  card_material: {fileID: 2100000, guid: 622be92e5bd711a4cb0bfa47cfeb10be, type: 2}

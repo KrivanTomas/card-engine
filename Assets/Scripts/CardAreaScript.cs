@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class CardAreaScript : MonoBehaviour
 {
@@ -105,6 +104,15 @@ public class CardAreaScript : MonoBehaviour
             lr.SetPositions(cardPositions);
         }
     }
+
+    public void Shuffle () {
+        for (int i = 0; i < cards.Count; i++) {
+            ClassicCardScript temp = cards[i];
+            int randomIndex = Random.Range(i, cards.Count);
+            cards[i] = cards[randomIndex];
+            cards[randomIndex] = temp;
+        }
+    }   
 
     public enum StackingDirection{
         RIGHT,

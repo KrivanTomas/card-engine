@@ -15,4 +15,4 @@ MonoBehaviour:
   card_value: 11
   card_color: 1
   card_symbol: 0
-  card_material: QH.asset
+  card_material: {fileID: 2100000, guid: b9cdc1843805b86419e29240a363c3a1, type: 2}

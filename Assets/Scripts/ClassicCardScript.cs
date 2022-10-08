@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class ClassicCardScript : MonoBehaviour
 {
@@ -51,6 +50,8 @@ public class ClassicCardScript : MonoBehaviour
         boxColl = GetComponent<BoxCollider>();
     }
 
+    // 6
+
     // Update is called once per frame
     void Update()
     {
@@ -67,7 +68,7 @@ public class ClassicCardScript : MonoBehaviour
         card_color = ccObject.card_color;
         card_symbol = ccObject.card_symbol;
 
-        gameObject.GetComponent<MeshRenderer>().material = (Material)AssetDatabase.LoadAssetAtPath(card_skins + ccObject.card_material, typeof(Material));
+        gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
     }
 
@@ -77,14 +78,14 @@ public class ClassicCardScript : MonoBehaviour
         card_value = ccObject.card_value;
         card_color = ccObject.card_color;
         card_symbol = ccObject.card_symbol;
-        gameObject.GetComponent<MeshRenderer>().material = (Material)AssetDatabase.LoadAssetAtPath(card_skins + ccObject.card_material, typeof(Material));
+        gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
     }
 
     public void InitProperties (string newCardSkin) { // Sets the properties from the new scriptable object
         initialized = false;
         card_skins = newCardSkin;
-        gameObject.GetComponent<MeshRenderer>().material = (Material)AssetDatabase.LoadAssetAtPath(card_skins + ccObject.card_material, typeof(Material));
+        gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
     }
 
@@ -95,7 +96,7 @@ public class ClassicCardScript : MonoBehaviour
         card_value = ccObject.card_value;
         card_color = ccObject.card_color;
         card_symbol = ccObject.card_symbol;
-        gameObject.GetComponent<MeshRenderer>().material = (Material)AssetDatabase.LoadAssetAtPath(card_skins + ccObject.card_material, typeof(Material));
+        gameObject.GetComponent<MeshRenderer>().material = ccObject.card_material;
         initialized = true;
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   card_value: 9
   card_color: 1
   card_symbol: 0
-  card_material: 10H.asset
+  card_material: {fileID: 2100000, guid: 2055d502a54fbbf4fb5bb741df6c6296, type: 2}
