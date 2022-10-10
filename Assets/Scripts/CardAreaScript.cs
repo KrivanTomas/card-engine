@@ -9,6 +9,7 @@ public class CardAreaScript : MonoBehaviour
     public CardSpacing cardSpacing = CardSpacing.FROMAREA;
     public bool stableOrigin = false;
     public string areaType;
+    public int ownershipID = -1;
 
     public int cardCount;
     public float cardWidth;
@@ -92,6 +93,7 @@ public class CardAreaScript : MonoBehaviour
 
             cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * 0.00030f * icard ); 
             cards[icard].gameObject.transform.position = cardPositions[icard];// + transform.up * cards[icard].offset; 
+            cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
             cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
         }
 
@@ -113,6 +115,11 @@ public class CardAreaScript : MonoBehaviour
             cards[randomIndex] = temp;
         }
     }   
+
+    public void DeleteCard (ClassicCardScript card) {
+        cards.Remove(card);
+        Destroy(card.gameObject);
+    }
 
     public enum StackingDirection{
         RIGHT,
