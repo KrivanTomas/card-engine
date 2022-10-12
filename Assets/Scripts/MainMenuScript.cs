@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
@@ -25,7 +26,33 @@ public class MainMenuScript : MonoBehaviour
                 break;
         }
     }
-    
+
+    public void Menu1() {
+        menu1.SetActive(true);
+        menu2.SetActive(false);
+        menu3.SetActive(false);
+    }
+
+    public void Menu2() {
+        menu1.SetActive(false);
+        menu2.SetActive(true);
+        menu3.SetActive(false);
+    }
+
+    public void Menu3() {
+        menu1.SetActive(false);
+        menu2.SetActive(false);
+        menu3.SetActive(true);
+    }
+
+    public void TheVoid() {          
+        SceneManager.LoadSceneAsync("SampleScene");
+    }
+
+    public void ARoom() {
+        SceneManager.LoadSceneAsync("MainScene");
+    }
+
     public void QuitGame() {
         Application.Quit();
     }

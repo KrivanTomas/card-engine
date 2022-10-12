@@ -22,10 +22,12 @@ public class AutobusGameScript : MonoBehaviour
     private CardAreaScript[] banks_cass;
     private CardAreaScript[] tables_cass;   
 
+    public TMPro.TextMeshProUGUI textMeshProUGUI;
+
 
     private List<ClassicCardScript> selectedCards = new List<ClassicCardScript>();
 
-    private int handMax = 60;
+    private int handMax = 5;
     private int bankMax = 7;
 
     // Start is called before the first frame update
@@ -50,7 +52,20 @@ public class AutobusGameScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        switch (turnSection){
+            case 0: {
+                textMeshProUGUI.text = "Draw cards";
+                break;
+            }
+            case 1: {
+                textMeshProUGUI.text = "Select cards";
+                break;
+            }
+            case 2: {
+                textMeshProUGUI.text = "Play cards";
+                break;
+            }
+        }
     }
 
     // potential bugs:
@@ -59,13 +74,13 @@ public class AutobusGameScript : MonoBehaviour
     private void StartGame() {
         playerTurn = 0;
         turnSection = 0;
-        foreach(CardAreaScript cas in hands_cass) {
-            for (int i = 0; i < handMax; i++)
-            {
-                DrawCardFromDeck(cas);
-            }
-            cas.cards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
-        }
+        // foreach(CardAreaScript cas in hands_cass) {
+        //     for (int i = 0; i < handMax; i++)
+        //     {
+        //         DrawCardFromDeck(cas);
+        //     }
+        //     cas.cards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
+        // }
         foreach(CardAreaScript cas in banks_cass) {
             for (int i = 0; i < bankMax; i++)
             {
@@ -76,23 +91,26 @@ public class AutobusGameScript : MonoBehaviour
         foreach(CardAreaScript cas in tables_cass) {
             AddInitCard(cas);
         }
+        AddInitCard(dump_cas);
     }
 
     public void ActionRequest(ClassicCardScript temp_ccs, int playerID) {
         if (playerID != playerTurn) return;
         CardAreaScript temp_cas = temp_ccs.CardArea;
 
-        if (hands_cass[playerTurn].cardCount == handMax &&  turnSection == 0) turnSection++;
+        //if (hands_cass[playerTurn].cardCount == handMax && turnSection == 0) turnSection++;
 
         print("card: " + temp_ccs.name + " in: " + temp_cas.name + " T" + turnSection + " P" + playerID); 
         switch (turnSection) {
             case 0: { // drawing cards to handMax
-                if (hands_cass[playerTurn].cardCount == handMax) { 
-                    turnSection++;
-                    break;
-                }
-                if (temp_ccs.CardArea.name == "deck") {
-                    DrawCardFromDeck(hands_cass[playerTurn]);
+                switch (temp_cas.areaType) {
+                    case "deck": {
+                        DrawCardFromDeck(hands_cass[playerTurn]);
+                        if (hands_cass[playerTurn].cardCount == handMax - 1) { // don't know why it has to be -1 ¯\_(ツ)_/¯
+                            turnSection++;
+                        }
+                        break;
+                    }
                 }
                 break;
             }
@@ -139,6 +157,15 @@ public class AutobusGameScript : MonoBehaviour
                         }
                         break;
                     }
+                    case "bank": {
+                        if (selectedCards[0].CardArea.areaType == "bank") {
+                            temp_ccs.selected = false;
+                            selectedCards.Remove(temp_ccs);
+                            if (selectedCards.Count == 0) turnSection--;
+                            break;
+                        }
+                        break;
+                    }
                     case "table": { // playing cards
 
                         // no joker after king fix
@@ -156,23 +183,43 @@ public class AutobusGameScript : MonoBehaviour
                             break;
                         }
 
-                        // multiple cards safety
+                        // multiple cards validation
                         if (selectedCards.Count > 1) {
-                        
+                            selectedCards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
+                            int last = (int)selectedCards[0].Card_value;
+                            for(int i = 1; i < selectedCards.Count; i++) {
+                                if(last + 1 != (int)selectedCards[i].Card_value) {
+                                    for(int b = i; b < selectedCards.Count; b++) {
+                                        selectedCards[i].selected = false;
+                                    }
+                                    selectedCards.RemoveRange(i, selectedCards.Count - i);
+                                    break;
+                                }
+                            }
                         }
                         
                         // replace init card
                         if (temp_cas.cards.Count == 1 && temp_ccs.Card_symbol == 0 && temp_ccs.Card_color == 0 &&
                         ((int)selectedCards[0].Card_value == 0 || (int)selectedCards[0].Card_value == 13)) { // black hearts
+                            temp_cas.areaSymbol = selectedCards[0].Card_symbol;
                             temp_cas.DeleteCard(temp_ccs);
+                            if (selectedCards[0].CardArea.areaType == "bank") {
+                                banks_cass[playerID].cards[banks_cass[playerID].cards.Count - 2].flipped = false;
+                            }
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
                             }
                             turnSection--;
                             break;
                         }
-                        if (temp_cas.areaSymbol == selectedCards[0].Card_symbol &&
+                        if ((temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
                         temp_cas.cards.Count == (int)selectedCards[0].Card_value || (int)selectedCards[0].Card_value == 13) {
+                            if (temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) {
+                                temp_cas.areaSymbol = selectedCards[0].Card_symbol;
+                            }
+                            if (selectedCards[0].CardArea.areaType == "bank") {
+                                banks_cass[playerID].cards[banks_cass[playerID].cards.Count - 2].flipped = false;
+                            }
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
                             }
@@ -181,17 +228,44 @@ public class AutobusGameScript : MonoBehaviour
                         }
                         break;
                     }
+                    case "dump": {
+                        if (selectedCards.Count == 1 && hands_cass[playerID].cardCount >= handMax) {
+                            MoveCard(selectedCards[0], temp_cas);
+                            NewPlayer();
+                        }
+                        break;
+                    }
                 }
                 break;
             }
-            case 3: {
-                break;
-            }
+            // case 3: {
+            //     if (hands_cass[playerID].cardCount < handMax){
+                    
+            //     }
+            //     else {
+            //         turnSection = 1;
+            //     }
+            //     break;
+            // }
             default: {
                 print("Error lol");
                 break;
             }
         }
+    }
+
+    public void EndTurn(int playerID) {
+        if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax) {
+            NewPlayer();
+        }
+    }
+
+    private void NewPlayer() {
+        playerTurn++;
+        if (playerTurn > hands.Length - 1) {
+            playerTurn = 0;
+        }
+        turnSection = 0;
     }
 
     private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas) {
