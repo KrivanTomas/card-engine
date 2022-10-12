@@ -9,6 +9,7 @@ public class CardAreaScript : MonoBehaviour
     public CardSpacing cardSpacing = CardSpacing.FROMAREA;
     public bool stableOrigin = false;
     public string areaType;
+    public ClassicCardObject.ccSymbol areaSymbol = ClassicCardObject.ccSymbol.NONE;
     public int ownershipID = -1;
 
     public int cardCount;

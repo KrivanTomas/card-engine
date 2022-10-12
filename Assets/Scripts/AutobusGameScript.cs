@@ -53,6 +53,9 @@ public class AutobusGameScript : MonoBehaviour
         
     }
 
+    // potential bugs:
+    // more than 2 card areas with a symbol
+
     private void StartGame() {
         playerTurn = 0;
         turnSection = 0;
@@ -137,34 +140,39 @@ public class AutobusGameScript : MonoBehaviour
                         break;
                     }
                     case "table": { // playing cards
+
+                        // no joker after king fix
+                        if (temp_cas.cardCount > 12) {
+                            break;
+                        }
+
                         // replace joker
-                        // if (selectedCards.Count == 1 && (int)temp_ccs.Card_value == 13) {
-                        //     if (temp_cas.cardCount == 1) {
-                        //         SwapCards(selectedCards[0], temp_ccs);
-                        //         break;
-                        //     }
-                        //     if (temp_cas.cards.IndexOf(temp_ccs) == 0 && (int)selectedCards[0])
-                        //     SwapCards(selectedCards[0], temp_ccs);
-                        // }
+                        if (selectedCards.Count == 1 && (int)temp_ccs.Card_value == 13 && 
+                        (temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
+                        (int)selectedCards[0].Card_value == temp_cas.cards.IndexOf(temp_ccs)) {
+                            SwapCards(selectedCards[0], temp_ccs);
+                            temp_cas.areaSymbol = selectedCards[0].Card_symbol;
+                            turnSection--;
+                            break;
+                        }
 
                         // multiple cards safety
                         if (selectedCards.Count > 1) {
                         
                         }
-
+                        
+                        // replace init card
                         if (temp_cas.cards.Count == 1 && temp_ccs.Card_symbol == 0 && temp_ccs.Card_color == 0 &&
                         ((int)selectedCards[0].Card_value == 0 || (int)selectedCards[0].Card_value == 13)) { // black hearts
                             temp_cas.DeleteCard(temp_ccs);
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
-                                
                             }
                             turnSection--;
                             break;
                         }
-                        if (temp_cas.cards[temp_cas.cards.Count - 1].Card_symbol == selectedCards[0].Card_symbol &&
-                        temp_cas.cards[temp_cas.cards.Count - 1].Card_value + 1 == selectedCards[0].Card_value ||
-                        (int)selectedCards[0].Card_value == 13) {
+                        if (temp_cas.areaSymbol == selectedCards[0].Card_symbol &&
+                        temp_cas.cards.Count == (int)selectedCards[0].Card_value || (int)selectedCards[0].Card_value == 13) {
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
                             }
@@ -200,11 +208,11 @@ public class AutobusGameScript : MonoBehaviour
         CardAreaScript old_cas1 = ccs1.CardArea;
         CardAreaScript old_cas2 = ccs2.CardArea;
         int index1 = old_cas1.cards.IndexOf(ccs1);
-        int index2 = old_cas1.cards.IndexOf(ccs2);
-        old_cas1.cards.Remove(ccs1);
-        old_cas2.cards.Remove(ccs2);
+        int index2 = old_cas2.cards.IndexOf(ccs2);
         old_cas2.cards.Insert(index2, ccs1);
         old_cas1.cards.Insert(index1, ccs2);
+        old_cas1.cards.Remove(ccs1);
+        old_cas2.cards.Remove(ccs2);
         ccs1.CardArea = old_cas2;
         ccs2.CardArea = old_cas1;
     }
