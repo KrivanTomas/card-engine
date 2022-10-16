@@ -124,6 +124,12 @@ public class AutobusGameScript : MonoBehaviour
                         break;
                     }
                     case "dump": {
+                        if (!((int)temp_ccs.Card_symbol == 0 && (int)temp_ccs.Card_color == 0)) {
+                            temp_ccs.selected = true;
+                            selectedCards.Add(temp_ccs);
+                            turnSection++;
+                            break;
+                        }
                         break;
                     }
                     case "bank": {
@@ -212,6 +218,9 @@ public class AutobusGameScript : MonoBehaviour
                             turnSection--;
                             break;
                         }
+                        else if ((int)selectedCards[0].Card_value == 1) {
+                            break;
+                        }
                         if ((temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
                         temp_cas.cards.Count == (int)selectedCards[0].Card_value || (int)selectedCards[0].Card_value == 13) {
                             if (temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) {
@@ -229,9 +238,16 @@ public class AutobusGameScript : MonoBehaviour
                         break;
                     }
                     case "dump": {
+                        if (selectedCards.Contains(temp_ccs)) {
+                            temp_ccs.selected = false;
+                            selectedCards.Remove(temp_ccs);
+                            if (selectedCards.Count == 0) turnSection--;
+                            break;
+                        }
                         if (selectedCards.Count == 1 && hands_cass[playerID].cardCount >= handMax) {
                             MoveCard(selectedCards[0], temp_cas);
                             NewPlayer();
+                            break;
                         }
                         break;
                     }
@@ -247,15 +263,11 @@ public class AutobusGameScript : MonoBehaviour
             //     }
             //     break;
             // }
-            default: {
-                print("Error lol");
-                break;
-            }
         }
     }
 
     public void EndTurn(int playerID) {
-        if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax) {
+        if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax && selectedCards.Count == 0) {
             NewPlayer();
         }
     }
@@ -270,9 +282,9 @@ public class AutobusGameScript : MonoBehaviour
 
     private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas) {
         CardAreaScript old_cas = ccs.CardArea;
+        ccs.selected = false;
         old_cas.cards.Remove(ccs);
         new_cas.cards.Add(ccs);
-        ccs.selected = false;
         ccs.CardArea = new_cas;
     }
 

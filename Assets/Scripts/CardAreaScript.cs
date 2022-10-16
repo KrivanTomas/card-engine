@@ -13,6 +13,7 @@ public class CardAreaScript : MonoBehaviour
     public int ownershipID = -1;
 
     public int cardCount;
+    public float cardThicc;
     public float cardWidth;
     public float cardHeight;
     public float cardAreaLength;
@@ -21,6 +22,7 @@ public class CardAreaScript : MonoBehaviour
 
     public bool lineDebug;
     public Material mat;
+    public GameObject cardPrefab;
 
     public List<ClassicCardScript> cards;
 
@@ -29,6 +31,9 @@ public class CardAreaScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cardWidth = cardPrefab.transform.localScale.x * 0.064f;
+        cardHeight = cardPrefab.transform.localScale.y * 0.089f;
+        cardThicc = cardPrefab.transform.localScale.z * 0.0003f;
         lr = gameObject.AddComponent<LineRenderer>();
         lr.material = mat;
         lr.startWidth = 0.01f; lr.endWidth = 0.01f;
@@ -92,7 +97,7 @@ public class CardAreaScript : MonoBehaviour
         cardPositions = new Vector3[cardCount];
         for(int icard = 0; icard < cardCount; icard++){
 
-            cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * 0.00030f * icard ); 
+            cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * cardThicc * icard ); 
             cards[icard].gameObject.transform.position = cardPositions[icard];// + transform.up * cards[icard].offset; 
             cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
             cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
