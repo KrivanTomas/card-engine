@@ -18,8 +18,8 @@ public class idk : MonoBehaviour
 
     private void Start() {
         cam = GetComponent<Camera>();
-        Agaem = gameLogic.GetComponent<AutobusGameScript>();
-        AnotherGaem = valkaLogic.GetComponent<ValkaGameScript>();
+        if(gameLogic) Agaem = gameLogic.GetComponent<AutobusGameScript>();
+        if(valkaLogic) AnotherGaem = valkaLogic.GetComponent<ValkaGameScript>();
     }
 
     private void Update() {
@@ -30,20 +30,21 @@ public class idk : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.Mouse0) && currccs) {
                 if(Agaem)
                     Agaem.ActionRequest(currccs, 0);
-                else if(AnotherGaem)
-                    AnotherGaem.Action(currccs);
+                else if(AnotherGaem){
+                    AnotherGaem.Action(currccs, 0);
+                }
             }
             if (currccs != lastccs){
                 if(currccs){
                     if (lastccs){
-                        lastccs.hover = false;;
+                        lastccs.hover = false;
                         lastccs.offset = 0f;
                         lastccs.stackPush = 0f;
                     }
                     lastccs = currccs;
                     currccs.offset = 0.03f;
-                    currccs.stackPush = 0.08f;  
-                    lastccs.hover = true;                   
+                    currccs.stackPush = 0.08f;
+                    lastccs.hover = true;
                 } 
             }
         }

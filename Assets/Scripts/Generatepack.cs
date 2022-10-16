@@ -18,9 +18,7 @@ public class Generatepack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cas = gameObject.GetComponent<CardAreaScript>();
-        hideawayTransform = cardHideaway.GetComponent<Transform>();
-        Generate();
+        
     }
 
     // Update is called once per frame
@@ -30,6 +28,9 @@ public class Generatepack : MonoBehaviour
     // }
 
     public void Generate () {
+        cas = gameObject.GetComponent<CardAreaScript>();
+        hideawayTransform = cardHideaway.GetComponent<Transform>();
+        
         foreach (ClassicCardScript ccsdel in cas.cards) {
             Destroy(ccsdel.gameObject);
         }
