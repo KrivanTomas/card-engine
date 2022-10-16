@@ -20,6 +20,7 @@ public class Generatepack : MonoBehaviour
     {
         cas = gameObject.GetComponent<CardAreaScript>();
         hideawayTransform = cardHideaway.GetComponent<Transform>();
+        Generate();
     }
 
     // Update is called once per frame

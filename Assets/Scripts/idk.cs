@@ -11,12 +11,15 @@ public class idk : MonoBehaviour
     ClassicCardScript lastccs;
     
     public GameObject gameLogic;
+    public GameObject valkaLogic;
 
     private AutobusGameScript Agaem;
+    private ValkaGameScript AnotherGaem;
 
     private void Start() {
         cam = GetComponent<Camera>();
         Agaem = gameLogic.GetComponent<AutobusGameScript>();
+        AnotherGaem = valkaLogic.GetComponent<ValkaGameScript>();
     }
 
     private void Update() {
@@ -25,7 +28,10 @@ public class idk : MonoBehaviour
         if(Physics.Raycast(mouseRay, out hit, 50f, 1 << LayerMask.NameToLayer("Card"))){
             currccs = hit.collider.gameObject.GetComponent<ClassicCardScript>();
             if(Input.GetKeyDown(KeyCode.Mouse0) && currccs) {
-                Agaem.ActionRequest(currccs, 0);
+                if(Agaem)
+                    Agaem.ActionRequest(currccs, 0);
+                else if(AnotherGaem)
+                    AnotherGaem.Action(currccs);
             }
             if (currccs != lastccs){
                 if(currccs){
