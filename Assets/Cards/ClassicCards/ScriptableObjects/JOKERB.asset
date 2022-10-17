@@ -15,4 +15,4 @@ MonoBehaviour:
   card_value: 13
   card_color: 0
   card_symbol: 4
-  card_material: JOKERB.asset
+  card_material: {fileID: 2100000, guid: fc3f278bc07cffe47835550c47c62b72, type: 2}

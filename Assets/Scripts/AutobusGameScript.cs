@@ -23,7 +23,8 @@ public class AutobusGameScript : MonoBehaviour
     private CardAreaScript[] tables_cass;   
 
     public TMPro.TextMeshProUGUI textMeshProUGUI;
-
+    public AudioSource audioSource;
+    public AudioClip cardSound;
 
     private List<ClassicCardScript> selectedCards = new List<ClassicCardScript>();
 
@@ -66,6 +67,26 @@ public class AutobusGameScript : MonoBehaviour
                 break;
             }
         }
+
+        foreach(CardAreaScript cas in tables_cass) {
+            if (cas.cardCount == 13) {
+                bool pack = true;
+                foreach (ClassicCardScript ccs in cas.cards) {
+                    if(ccs.Card_value == ClassicCardObject.ccValue.JOKER) {
+                        pack = false;
+                    }
+                }
+                if (pack) {
+                    foreach (ClassicCardScript ccs in cas.cards) {
+                        MoveCard(ccs, deck_cas);
+                        ccs.flipped = true;
+                    }
+                    deck_cas.Shuffle();
+                    cas.areaSymbol = ClassicCardObject.ccSymbol.NONE;
+                    AddInitCard(cas);
+                }
+            }
+        }
     }
 
     // potential bugs:
@@ -74,13 +95,14 @@ public class AutobusGameScript : MonoBehaviour
     private void StartGame() {
         playerTurn = 0;
         turnSection = 0;
-        // foreach(CardAreaScript cas in hands_cass) {
-        //     for (int i = 0; i < handMax; i++)
-        //     {
-        //         DrawCardFromDeck(cas);
-        //     }
-        //     cas.cards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
-        // }
+        foreach(CardAreaScript cas in hands_cass) {
+            for (int i = 0; i < handMax; i++)
+            {
+                DrawCardFromDeck(cas);
+            }
+            cas.SortCards();
+            turnSection++;
+        }
         foreach(CardAreaScript cas in banks_cass) {
             for (int i = 0; i < bankMax; i++)
             {
@@ -92,6 +114,7 @@ public class AutobusGameScript : MonoBehaviour
             AddInitCard(cas);
         }
         AddInitCard(dump_cas);
+        audioSource.Stop();
     }
 
     public void ActionRequest(ClassicCardScript temp_ccs, int playerID) {
@@ -124,6 +147,12 @@ public class AutobusGameScript : MonoBehaviour
                         break;
                     }
                     case "dump": {
+                        if (!((int)temp_ccs.Card_symbol == 0 && (int)temp_ccs.Card_color == 0)) {
+                            temp_ccs.selected = true;
+                            selectedCards.Add(temp_ccs);
+                            turnSection++;
+                            break;
+                        }
                         break;
                     }
                     case "bank": {
@@ -212,6 +241,9 @@ public class AutobusGameScript : MonoBehaviour
                             turnSection--;
                             break;
                         }
+                        if (temp_cas.cards.Count == 1 && temp_ccs.Card_symbol == 0 && temp_ccs.Card_color == 0) {
+                            break;
+                        }
                         if ((temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
                         temp_cas.cards.Count == (int)selectedCards[0].Card_value || (int)selectedCards[0].Card_value == 13) {
                             if (temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) {
@@ -229,9 +261,19 @@ public class AutobusGameScript : MonoBehaviour
                         break;
                     }
                     case "dump": {
+                        if (selectedCards.Contains(temp_ccs)) {
+                            temp_ccs.selected = false;
+                            selectedCards.Remove(temp_ccs);
+                            if (selectedCards.Count == 0) turnSection--;
+                            break;
+                        }
+                        if(selectedCards[0].CardArea.areaType == "bank") {
+                            break;
+                        }
                         if (selectedCards.Count == 1 && hands_cass[playerID].cardCount >= handMax) {
                             MoveCard(selectedCards[0], temp_cas);
                             NewPlayer();
+                            break;
                         }
                         break;
                     }
@@ -247,15 +289,11 @@ public class AutobusGameScript : MonoBehaviour
             //     }
             //     break;
             // }
-            default: {
-                print("Error lol");
-                break;
-            }
         }
     }
 
     public void EndTurn(int playerID) {
-        if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax) {
+        if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax && selectedCards.Count == 0) {
             NewPlayer();
         }
     }
@@ -270,10 +308,11 @@ public class AutobusGameScript : MonoBehaviour
 
     private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas) {
         CardAreaScript old_cas = ccs.CardArea;
+        ccs.selected = false;
         old_cas.cards.Remove(ccs);
         new_cas.cards.Add(ccs);
-        ccs.selected = false;
         ccs.CardArea = new_cas;
+        audioSource.PlayOneShot(cardSound);
     }
 
     private void SwapCards(ClassicCardScript ccs1, ClassicCardScript ccs2) {
@@ -289,18 +328,21 @@ public class AutobusGameScript : MonoBehaviour
         old_cas2.cards.Remove(ccs2);
         ccs1.CardArea = old_cas2;
         ccs2.CardArea = old_cas1;
+        audioSource.PlayOneShot(cardSound);
     }
 
     private void DrawCardFromDeck(CardAreaScript target) {
         ClassicCardScript temp_ccs = deck_cas.cards[deck_cas.cards.Count - 1];
         MoveCard(temp_ccs, target);
         temp_ccs.flipped = false;
+        audioSource.PlayOneShot(cardSound);
     }
 
     private void DrawCardFromDeck(CardAreaScript target, bool flip) {
         ClassicCardScript temp_ccs = deck_cas.cards[deck_cas.cards.Count - 1];
         MoveCard(temp_ccs, target);
         temp_ccs.flipped = flip;
+        audioSource.PlayOneShot(cardSound);
     }
 
     private void AddInitCard (CardAreaScript target) {

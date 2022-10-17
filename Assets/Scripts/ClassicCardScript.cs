@@ -41,6 +41,7 @@ public class ClassicCardScript : MonoBehaviour
     public Vector3 rotation = new Vector3(0f,0f,0f);
     public float offset = 0f; //should be Vector3 but am dumb (┬┬﹏┬┬) 
     public float stackPush = 0f;
+    public float stackPushFix = 0f;
 
     public GameObject highlight;
     private GameObject temp_highlight = null;
@@ -65,11 +66,15 @@ public class ClassicCardScript : MonoBehaviour
         else if (!(hover || selected) && temp_highlight) {
             RemoveHighlight();
         }
+        if (selected) {
+            offset = 0.02f;
+        } else {
+            offset = 0f;
+        }
 
 
 
-
-        //boxColl.center = -transform.up * offset;
+        boxColl.center = -Vector3.up * offset * (cardArea.areaType == "hand" && selected ? 1 : 0) - Vector3.right * stackPushFix * (cardArea.areaType == "hand" ? 1 : 0);
         // if(!initialized || !animating) return;
 
         // animation code

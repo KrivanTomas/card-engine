@@ -49,11 +49,15 @@ MonoBehaviour:
   cardSpacing: 1
   stableOrigin: 1
   areaType: 
+  areaSymbol: 4
+  ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 1
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 1475565992090825795, guid: 8beb7beb999444c47bb03c5c6fb2a38f, type: 3}
   cards: []
