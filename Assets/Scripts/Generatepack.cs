@@ -27,7 +27,7 @@ public class Generatepack : MonoBehaviour
     // }
 
     public void Generate () {
-        cas = gameObject.GetComponent<CardAreaScript>();
+        cas = GetComponent<CardAreaScript>();
         hideawayTransform = cardHideaway.GetComponent<Transform>();
         foreach (ClassicCardScript ccsdel in cas.cards) {
             Destroy(ccsdel.gameObject);
@@ -54,11 +54,7 @@ public class Generatepack : MonoBehaviour
             }
         }
         if (shuffle) {
-
             cas.Shuffle();
-            //Random rand = new Random();
-            // Random.InitState
-            // var models = garage.OrderBy(c => rand.Next()).Select(c => c.Model).ToList();
         }
     }
 }

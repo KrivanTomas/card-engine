@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CameraInteractScript : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class CameraInteractScript : MonoBehaviour
     ClassicCardScript lastccs;
     
     public GameObject gameLogic;
+    public PostProcessVolume ppVolume;
+    private DepthOfField dof;
 
     private AutobusGameScript Agaem;
 
+    float dof_velocity = 0;
+
     private void Start() {
+        ppVolume.profile.TryGetSettings(out dof);
         cam = GetComponent<Camera>();
         Agaem = gameLogic.GetComponent<AutobusGameScript>();
     }
@@ -29,13 +35,11 @@ public class CameraInteractScript : MonoBehaviour
             if (currccs != lastccs){
                 if(currccs){
                     if (lastccs){
-                        lastccs.hover = false;;
-                        lastccs.offset = 0f;
+                        lastccs.hover = false;
                         lastccs.stackPush = 0f;
                     }
                     lastccs = currccs;
-                    currccs.offset = 0.03f;
-                    currccs.stackPush = 0.08f;  
+                    currccs.stackPush = 0.05f;  
                     lastccs.hover = true;                   
                 } 
             }
@@ -48,5 +52,11 @@ public class CameraInteractScript : MonoBehaviour
                 lastccs = null;
             }
         }
+        if (Physics.Raycast(mouseRay, out hit, 50f)) {
+            float target = Vector3.Distance(transform.position, hit.point);
+            float current = dof.focusDistance.value;
+            //dof.focusDistance.value = Mathf.Lerp(current, target, Mathf.PingPong(Time.time * 0.01f, 1));
+            dof.focusDistance.value = Mathf.SmoothDamp(current, target, ref dof_velocity, 0.2f);
+        } 
     }
 }

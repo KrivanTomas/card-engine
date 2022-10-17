@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2459840570799462983}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!114 &2459840569193020378
 MonoBehaviour:
@@ -52,12 +52,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 2.01
   totalStacking: 0
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840569520190359
 GameObject:
@@ -245,12 +247,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840569712217599
 GameObject:
@@ -384,7 +388,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2459840570799462983}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2459840570076033261
 GameObject:
@@ -448,7 +452,7 @@ Transform:
   - {fileID: 4384192134798293526}
   - {fileID: 2459840570727764022}
   m_Father: {fileID: 2459840570799462983}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2459840570358048995
 GameObject:
@@ -502,12 +506,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570483984400
 GameObject:
@@ -622,12 +628,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570727764017
 GameObject:
@@ -681,12 +689,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: 0
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570745830028
 GameObject:
@@ -740,12 +750,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570790484965
 GameObject:
@@ -799,12 +811,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570799462982
 GameObject:
@@ -834,6 +848,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9073410214677845773}
   - {fileID: 2459840570985095975}
   - {fileID: 2459840571142545132}
   - {fileID: 2459840569193020373}
@@ -894,12 +909,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570865766658
 GameObject:
@@ -1121,12 +1138,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &2459840570985095974
 GameObject:
@@ -1165,7 +1184,7 @@ Transform:
   - {fileID: 2459840570790484970}
   - {fileID: 2459840569677159207}
   m_Father: {fileID: 2459840570799462983}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2459840571031724478
 GameObject:
@@ -1232,7 +1251,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2459840570799462983}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 90, z: 0}
 --- !u!114 &2459840571142545133
 MonoBehaviour:
@@ -1254,12 +1273,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 2.01
   totalStacking: 0
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!114 &2459840571142545106
 MonoBehaviour:
@@ -1386,13 +1407,143 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: -1
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.351
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
+--- !u!1 &2940441768713780178
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9073410214677845773}
+  - component: {fileID: 2316090835705823655}
+  m_Layer: 0
+  m_Name: sounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9073410214677845773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940441768713780178}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2459840570799462983}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &2316090835705823655
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2940441768713780178}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4384192134798293525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,12 +1596,14 @@ MonoBehaviour:
   areaSymbol: 4
   ownershipID: 0
   cardCount: 0
+  cardThicc: 0
   cardWidth: 0.064
   cardHeight: 0.089
   cardAreaLength: 0.5
   totalStacking: 0.222
   lineDebug: 0
   mat: {fileID: 2100000, guid: 86755420d970b724aa3187db19368ac3, type: 2}
+  cardPrefab: {fileID: 0}
   cards: []
 --- !u!1 &8734902615146963610
 GameObject:
