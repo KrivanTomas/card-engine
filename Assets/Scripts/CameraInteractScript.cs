@@ -19,6 +19,8 @@ public class CameraInteractScript : MonoBehaviour
 
     float dof_velocity = 0;
 
+    public bool depthOfField = true;
+
     private void Start() {
         ppVolume.profile.TryGetSettings(out dof);
         cam = GetComponent<Camera>();
@@ -62,6 +64,10 @@ public class CameraInteractScript : MonoBehaviour
             float current = dof.focusDistance.value;
             //dof.focusDistance.value = Mathf.Lerp(current, target, Mathf.PingPong(Time.time * 0.01f, 1));
             dof.focusDistance.value = Mathf.SmoothDamp(current, target, ref dof_velocity, 0.2f);
-        } 
+        }
+    }
+    public void DOFFunction()
+    {
+        dof.enabled.value = !dof.enabled.value;
     }
 }
