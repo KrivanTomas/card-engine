@@ -45,8 +45,8 @@ public class MainMenuScript : MonoBehaviour
         menu3.SetActive(true);
     }
 
-    public void TheVoid() {          
-        SceneManager.LoadSceneAsync("SampleScene");
+    public void VRoom() {          
+        SceneManager.LoadSceneAsync("ValkaScene");
     }
 
     public void ARoom() {

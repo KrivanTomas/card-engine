@@ -27,6 +27,9 @@ public class FPViewScript : MonoBehaviour
     float pSpeed = 0;
     float timePosition = 0;
 
+    public GameObject menuObject;
+    bool menuOnScreen = false;
+
     Camera cam;
     // Start is called before the first frame update
     void Start()
@@ -45,8 +48,20 @@ public class FPViewScript : MonoBehaviour
         Position();
 
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            SceneManager.LoadSceneAsync("MainMenu");
+            ShowMenu();
         }
+    }
+
+    private void ShowMenu()
+    {
+        if(menuOnScreen)
+        {
+            menuObject.SetActive(false);
+            menuOnScreen = false;
+            return;
+        }
+        menuObject.SetActive(true);
+        menuOnScreen = true;
     }
 
     private void Zoom() {
