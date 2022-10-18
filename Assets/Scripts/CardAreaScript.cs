@@ -28,9 +28,11 @@ public class CardAreaScript : MonoBehaviour
 
     private Vector3[] cardPositions;
     private LineRenderer lr;
+
     // Start is called before the first frame update
     void Start()
     {
+
         cardWidth = cardPrefab.transform.localScale.x * 0.064f;
         cardHeight = cardPrefab.transform.localScale.y * 0.089f;
         cardThicc = cardPrefab.transform.localScale.z * 0.0003f;
@@ -113,18 +115,16 @@ public class CardAreaScript : MonoBehaviour
                 cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
                 cards[icard].gameObject.transform.rotation = Quaternion.Slerp(cards[icard].gameObject.transform.rotation, transform.rotation * Quaternion.Euler(cards[icard].rotation), cards[icard].timeRot);
             }
-            else {
-                if (areaType == "hand" && cards[icard].selected){
-                    cards[icard].gameObject.transform.position = cardPositions[icard] + transform.up * cards[icard].offset; 
-                } else {
-                    cards[icard].gameObject.transform.position = cardPositions[icard]; 
-                }
-                cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
-                cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
-            }
+            // else {
+            //     if (areaType == "hand" && cards[icard].selected){
+            //         cards[icard].gameObject.transform.position = cardPositions[icard] + transform.up * cards[icard].offset; 
+            //     } else {
+            //         cards[icard].gameObject.transform.position = cardPositions[icard]; 
+            //     }
+            //     cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
+            //     cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
+            // }
         }
-
-
 
         //Set line (debug)
         //lr.enabled = lineDebug;                       <- je to divny, nenajde to instanci objektu pritom to je inicializovany ve startu

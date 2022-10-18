@@ -159,6 +159,8 @@ MonoBehaviour:
   - {fileID: 2049759026}
   - {fileID: 538101712}
   startingDeck: {fileID: 712904207}
+  audioSource: {fileID: 1834508682}
+  cardSound: {fileID: 8300000, guid: 138bebec42801b74db41974bfbb1ed25, type: 3}
 --- !u!4 &4311702
 Transform:
   m_ObjectHideFlags: 0
@@ -4733,7 +4735,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1834508683}
   - component: {fileID: 1834508682}
-  - component: {fileID: 1834508681}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -4741,29 +4742,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
---- !u!164 &1834508681
-AudioReverbFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834508680}
-  m_Enabled: 1
-  m_DryLevel: 0
-  m_Room: 0
-  m_RoomHF: 0
-  m_DecayTime: 1
-  m_DecayHFRatio: 0.5
-  m_ReflectionsLevel: -10000
-  m_ReverbLevel: 0
-  m_ReverbDelay: 0.04
-  m_Diffusion: 100
-  m_Density: 100
-  m_HFReference: 5000
-  m_RoomLF: 0
-  m_LFReference: 250
-  m_ReflectionsDelay: 0
-  m_ReverbPreset: 27
 --- !u!82 &1834508682
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4776,7 +4754,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4c9b270b478d97f4493d8760f8cc4973, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.273
+  m_Volume: 0.068
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4820,7 +4798,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0

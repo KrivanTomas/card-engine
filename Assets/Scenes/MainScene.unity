@@ -2550,7 +2550,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1521708770}
   - component: {fileID: 1521708771}
-  - component: {fileID: 1521708772}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -2640,7 +2639,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.5
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -2680,29 +2679,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!164 &1521708772
-AudioReverbFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1521708769}
-  m_Enabled: 1
-  m_DryLevel: 0
-  m_Room: 0
-  m_RoomHF: 0
-  m_DecayTime: 1
-  m_DecayHFRatio: 0.5
-  m_ReflectionsLevel: -10000
-  m_ReverbLevel: 0
-  m_ReverbDelay: 0.04
-  m_Diffusion: 100
-  m_Density: 100
-  m_HFReference: 5000
-  m_RoomLF: 0
-  m_LFReference: 250
-  m_ReflectionsDelay: 0
-  m_ReverbPreset: 27
 --- !u!1001 &1528637727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3580,7 +3556,7 @@ PrefabInstance:
     - target: {fileID: 2459840570483984401, guid: 28cdb712ac2da7640b5fcc6125d246ad, type: 3}
       propertyPath: cardSound
       value: 
-      objectReference: {fileID: 8300000, guid: 517c766d6746d1a4eac14d5ccd2894bf, type: 3}
+      objectReference: {fileID: 8300000, guid: 138bebec42801b74db41974bfbb1ed25, type: 3}
     - target: {fileID: 2459840570483984401, guid: 28cdb712ac2da7640b5fcc6125d246ad, type: 3}
       propertyPath: audioSource
       value: 

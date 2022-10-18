@@ -68,6 +68,17 @@ public class AutobusGameScript : MonoBehaviour
             }
         }
 
+        if (deck_cas.cardCount == 0) {
+            while(dump_cas.cards.Count > 0)
+            {
+                ClassicCardScript ccs = dump_cas.cards[0];
+                MoveCard(ccs, deck_cas);
+                ccs.flipped = true;
+            }
+            deck_cas.Shuffle();
+            AddInitCard(dump_cas);
+        }
+
         foreach(CardAreaScript cas in tables_cass) {
             if (cas.cardCount == 13) {
                 bool pack = true;

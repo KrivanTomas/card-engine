@@ -11,6 +11,9 @@ public class ValkaGameScript : MonoBehaviour
 
     private Generatepack gen;
     
+    public AudioSource audioSource;
+    public AudioClip cardSound;
+
     //bool roundEnded = false;
     int playerCount = 2;
     //int playerTurn = 0;
@@ -51,6 +54,7 @@ public class ValkaGameScript : MonoBehaviour
             else 
                 DrawCardFromDeck(1, true);
         }
+        audioSource.Stop();
     }
 
     public void Action(ClassicCardScript ccs, int playerID)
@@ -121,6 +125,10 @@ public class ValkaGameScript : MonoBehaviour
         new_cas.cards.Add(ccs);
         ccs.selected = false;
         ccs.CardArea = new_cas;
+        audioSource.Stop();
+        audioSource.PlayOneShot(cardSound);
+        ccs.timePos = 0f;
+        ccs.timeRot = 0f;
     }
     private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas, bool flip) {
         CardAreaScript old_cas = ccs.CardArea;
@@ -129,6 +137,10 @@ public class ValkaGameScript : MonoBehaviour
         ccs.selected = false;
         ccs.CardArea = new_cas;
         ccs.flipped = flip;
+        audioSource.Stop();
+        audioSource.PlayOneShot(cardSound);
+        ccs.timePos = 0f;
+        ccs.timeRot = 0f;
     }
 
     private void DrawCardFromDeck(int playerID, bool flip) {
