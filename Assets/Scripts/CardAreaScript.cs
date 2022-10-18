@@ -20,7 +20,7 @@ public class CardAreaScript : MonoBehaviour
     [Range(0f,1f)]
     public float totalStacking;
 
-    public bool lineDebug;
+    public bool lineDebug = false;
     public Material mat;
     public GameObject cardPrefab;
 
@@ -114,7 +114,7 @@ public class CardAreaScript : MonoBehaviour
 
 
         //Set line (debug)
-        lr.enabled = lineDebug;
+        //lr.enabled = lineDebug;                       <- je to divny, nenajde to instanci objektu pritom to je inicializovany ve startu
         if(lineDebug){
             lr.positionCount = cardCount;
             lr.SetPositions(cardPositions);
