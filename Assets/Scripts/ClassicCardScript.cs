@@ -42,6 +42,8 @@ public class ClassicCardScript : MonoBehaviour
     public float offset = 0f; //should be Vector3 but am dumb (┬┬﹏┬┬) 
     public float stackPush = 0f;
     public float stackPushFix = 0f;
+    public float timePos = 0f;
+    public float timeRot = 0f;
 
     public GameObject highlight;
     private GameObject temp_highlight = null;

@@ -313,6 +313,8 @@ public class AutobusGameScript : MonoBehaviour
         new_cas.cards.Add(ccs);
         ccs.CardArea = new_cas;
         audioSource.PlayOneShot(cardSound);
+        ccs.timePos = 0f;
+        ccs.timeRot = 0f;
     }
 
     private void SwapCards(ClassicCardScript ccs1, ClassicCardScript ccs2) {
@@ -329,6 +331,10 @@ public class AutobusGameScript : MonoBehaviour
         ccs1.CardArea = old_cas2;
         ccs2.CardArea = old_cas1;
         audioSource.PlayOneShot(cardSound);
+        ccs1.timePos = 0f;
+        ccs2.timePos = 0f;
+        ccs1.timeRot = 0f;
+        ccs2.timeRot = 0f;
     }
 
     private void DrawCardFromDeck(CardAreaScript target) {
@@ -336,6 +342,8 @@ public class AutobusGameScript : MonoBehaviour
         MoveCard(temp_ccs, target);
         temp_ccs.flipped = false;
         audioSource.PlayOneShot(cardSound);
+        temp_ccs.timePos = 0f;
+        temp_ccs.timeRot = 0f;
     }
 
     private void DrawCardFromDeck(CardAreaScript target, bool flip) {
@@ -343,6 +351,8 @@ public class AutobusGameScript : MonoBehaviour
         MoveCard(temp_ccs, target);
         temp_ccs.flipped = flip;
         audioSource.PlayOneShot(cardSound);
+        temp_ccs.timePos = 0f;
+        temp_ccs.timeRot = 0f;
     }
 
     private void AddInitCard (CardAreaScript target) {

@@ -100,15 +100,28 @@ public class CardAreaScript : MonoBehaviour
         // smth from local space to world space
         cardPositions = new Vector3[cardCount];
         for(int icard = 0; icard < cardCount; icard++){
-
+            cards[icard].timePos += Time.deltaTime;
+            cards[icard].timeRot += Time.deltaTime;
+            
             cardPositions[icard] = tempStackDir * localTransform[icard] + transform.position + (-transform.forward * cardThicc * icard);
-            if (areaType == "hand" && cards[icard].selected){
-                cards[icard].gameObject.transform.position = cardPositions[icard] + transform.up * cards[icard].offset; 
-            } else {
-                cards[icard].gameObject.transform.position = cardPositions[icard];
+            if (true) { //settings
+                if (areaType == "hand" && cards[icard].selected){
+                    cards[icard].gameObject.transform.position = Vector3.Lerp(cards[icard].gameObject.transform.position, cardPositions[icard] + transform.up * cards[icard].offset, cards[icard].timePos); 
+                } else {
+                    cards[icard].gameObject.transform.position = Vector3.Lerp(cards[icard].gameObject.transform.position, cardPositions[icard], cards[icard].timePos); 
+                }
+                cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
+                cards[icard].gameObject.transform.rotation = Quaternion.Slerp(cards[icard].gameObject.transform.rotation, transform.rotation * Quaternion.Euler(cards[icard].rotation), cards[icard].timeRot);
             }
-            cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
-            cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
+            else {
+                if (areaType == "hand" && cards[icard].selected){
+                    cards[icard].gameObject.transform.position = cardPositions[icard] + transform.up * cards[icard].offset; 
+                } else {
+                    cards[icard].gameObject.transform.position = cardPositions[icard]; 
+                }
+                cards[icard].rotation = cards[icard].flipped ? new Vector3(0f,180f,0f) : new Vector3(0f,0f,0f);
+                cards[icard].gameObject.transform.rotation = transform.rotation * Quaternion.Euler(cards[icard].rotation);  
+            }
         }
 
 
