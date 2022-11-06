@@ -30,7 +30,10 @@ public class FPViewScript : MonoBehaviour
     public GameObject menuObject;
     bool menuOnScreen = false;
 
+    public GameObject corsshair;
+
     Camera cam;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +89,7 @@ public class FPViewScript : MonoBehaviour
     private void View() {
         if (Input.GetKeyDown(KeyCode.Tab)) {
             Cursor.lockState = CursorLockMode.Locked;
+            corsshair.SetActive(true);
         }
         if (Input.GetKey(KeyCode.Tab))
         {
@@ -101,6 +105,7 @@ public class FPViewScript : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Tab)) {
             Cursor.lockState = CursorLockMode.None;
+            corsshair.SetActive(false);
             xRot = currentRotation.y;
             yRot = currentRotation.x;
             timeView = 0f;
