@@ -619,7 +619,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c5fc8a4d4a91e4a91468754d1772eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.425
+      value: 0.437
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95c5fc8a4d4a91e4a91468754d1772eb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1161,7 +1161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1553898111}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalPosition: {x: -0.015, y: -0.245, z: 0.062}
   m_LocalScale: {x: 1.2551618, y: 1.2551618, z: 1.2551618}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1180,7 +1180,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.5403299, b: 0, a: 1}
-  m_Intensity: 1.53
+  m_Intensity: 1.45
   m_Range: 16.98
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1189,7 +1189,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.9
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -1379,6 +1379,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e6607eed0777d1942971348f31d05f72, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab59e9b478e2e8e4b9b356b37d9059c8, type: 2}
     - target: {fileID: 919132149155446097, guid: e6607eed0777d1942971348f31d05f72, type: 3}
       propertyPath: m_Name
       value: room
