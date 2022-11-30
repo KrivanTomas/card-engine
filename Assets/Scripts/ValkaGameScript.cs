@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValkaGameScript : MonoBehaviour
+public class ValkaGameScript : GameLogicAbstract
 {
     public CardAreaScript[] handArea;
     public CardAreaScript[] gameArea;
@@ -11,9 +11,6 @@ public class ValkaGameScript : MonoBehaviour
 
     private Generatepack gen;
     
-    public AudioSource audioSource;
-    public AudioClip cardSound;
-
     //bool roundEnded = false;
     int playerCount = 2;
     //int playerTurn = 0;
@@ -50,9 +47,9 @@ public class ValkaGameScript : MonoBehaviour
         int count = startingDeck.cards.Count;
         for(int i = 0; i < count; i++){
             if(count / 2 <= i)
-                DrawCardFromDeck(0, true);
+                DrawCardFromDeck(startingDeck, handArea[0], true);
             else 
-                DrawCardFromDeck(1, true);
+                DrawCardFromDeck(startingDeck, handArea[1], true);
         }
         audioSource.Stop();
     }
@@ -117,40 +114,5 @@ public class ValkaGameScript : MonoBehaviour
             }
         }
         handArea[playerID].Shuffle();
-    }
-
-    private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas) {
-        CardAreaScript old_cas = ccs.CardArea;
-        old_cas.cards.Remove(ccs);
-        new_cas.cards.Add(ccs);
-        ccs.selected = false;
-        ccs.CardArea = new_cas;
-        audioSource.Stop();
-        audioSource.PlayOneShot(cardSound);
-        ccs.timePos = 0f;
-        ccs.timeRot = 0f;
-    }
-    private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas, bool flip) {
-        CardAreaScript old_cas = ccs.CardArea;
-        old_cas.cards.Remove(ccs);
-        new_cas.cards.Add(ccs);
-        ccs.selected = false;
-        ccs.CardArea = new_cas;
-        ccs.flipped = flip;
-        audioSource.Stop();
-        audioSource.PlayOneShot(cardSound);
-        ccs.timePos = 0f;
-        ccs.timeRot = 0f;
-    }
-
-    private void DrawCardFromDeck(int playerID, bool flip) {
-        ClassicCardScript temp_ccs = startingDeck.cards[startingDeck.cards.Count - 1];
-        MoveCard(temp_ccs, handArea[playerID]);
-        temp_ccs.flipped = flip;
-    }
-    private void DrawCardFromDeck(int playerID) {
-        ClassicCardScript temp_ccs = startingDeck.cards[startingDeck.cards.Count - 1];
-        MoveCard(temp_ccs, handArea[playerID]);
-        temp_ccs.flipped = false;
     }
 }

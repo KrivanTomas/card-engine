@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutobusGameScript : MonoBehaviour
+public class AutobusGameScript : GameLogicAbstract
 {
 
     private int playerTurn = 0;
@@ -23,9 +23,6 @@ public class AutobusGameScript : MonoBehaviour
     private CardAreaScript[] tables_cass;   
 
     public TMPro.TextMeshProUGUI textMeshProUGUI;
-    public AudioSource audioSource;
-    public AudioClip cardSound;
-
     private List<ClassicCardScript> selectedCards = new List<ClassicCardScript>();
 
     private int handMax = 5;
@@ -109,7 +106,7 @@ public class AutobusGameScript : MonoBehaviour
         foreach(CardAreaScript cas in hands_cass) {
             for (int i = 0; i < handMax; i++)
             {
-                DrawCardFromDeck(cas);
+                DrawCardFromDeck(deck_cas, cas);
             }
             cas.SortCards();
             turnSection++;
@@ -117,8 +114,8 @@ public class AutobusGameScript : MonoBehaviour
         foreach(CardAreaScript cas in banks_cass) {
             for (int i = 0; i < bankMax; i++)
             {
-                if (i < bankMax - 1) DrawCardFromDeck(cas, true);
-                else DrawCardFromDeck(cas, false);
+                if (i < bankMax - 1) DrawCardFromDeck(deck_cas, cas, true);
+                else DrawCardFromDeck(deck_cas, cas, false);
             }
         }
         foreach(CardAreaScript cas in tables_cass) {
@@ -139,7 +136,7 @@ public class AutobusGameScript : MonoBehaviour
             case 0: { // drawing cards to handMax
                 switch (temp_cas.areaType) {
                     case "deck": {
-                        DrawCardFromDeck(hands_cass[playerTurn]);
+                        DrawCardFromDeck(deck_cas, hands_cass[playerTurn]);
                         if (hands_cass[playerTurn].cardCount == handMax - 1) { // don't know why it has to be -1 ¯\_(ツ)_/¯
                             turnSection++;
                         }
@@ -315,55 +312,6 @@ public class AutobusGameScript : MonoBehaviour
             playerTurn = 0;
         }
         turnSection = 0;
-    }
-
-    private void MoveCard(ClassicCardScript ccs, CardAreaScript new_cas) {
-        CardAreaScript old_cas = ccs.CardArea;
-        ccs.selected = false;
-        old_cas.cards.Remove(ccs);
-        new_cas.cards.Add(ccs);
-        ccs.CardArea = new_cas;
-        audioSource.PlayOneShot(cardSound);
-        ccs.timePos = 0f;
-        ccs.timeRot = 0f;
-    }
-
-    private void SwapCards(ClassicCardScript ccs1, ClassicCardScript ccs2) {
-        ccs1.selected = false;
-        ccs2.selected = false;
-        CardAreaScript old_cas1 = ccs1.CardArea;
-        CardAreaScript old_cas2 = ccs2.CardArea;
-        int index1 = old_cas1.cards.IndexOf(ccs1);
-        int index2 = old_cas2.cards.IndexOf(ccs2);
-        old_cas2.cards.Insert(index2, ccs1);
-        old_cas1.cards.Insert(index1, ccs2);
-        old_cas1.cards.Remove(ccs1);
-        old_cas2.cards.Remove(ccs2);
-        ccs1.CardArea = old_cas2;
-        ccs2.CardArea = old_cas1;
-        audioSource.PlayOneShot(cardSound);
-        ccs1.timePos = 0f;
-        ccs2.timePos = 0f;
-        ccs1.timeRot = 0f;
-        ccs2.timeRot = 0f;
-    }
-
-    private void DrawCardFromDeck(CardAreaScript target) {
-        ClassicCardScript temp_ccs = deck_cas.cards[deck_cas.cards.Count - 1];
-        MoveCard(temp_ccs, target);
-        temp_ccs.flipped = false;
-        audioSource.PlayOneShot(cardSound);
-        temp_ccs.timePos = 0f;
-        temp_ccs.timeRot = 0f;
-    }
-
-    private void DrawCardFromDeck(CardAreaScript target, bool flip) {
-        ClassicCardScript temp_ccs = deck_cas.cards[deck_cas.cards.Count - 1];
-        MoveCard(temp_ccs, target);
-        temp_ccs.flipped = flip;
-        audioSource.PlayOneShot(cardSound);
-        temp_ccs.timePos = 0f;
-        temp_ccs.timeRot = 0f;
     }
 
     private void AddInitCard (CardAreaScript target) {
