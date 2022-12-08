@@ -50,7 +50,7 @@ public class MainMenuScript : MonoBehaviour
     }
 
     public void ARoom() {
-        SceneManager.LoadSceneAsync("MainScene");
+        SceneManager.LoadSceneAsync("AutobusScene");
     }
 
     public void QuitGame() {

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: d7830cb454f242142ba541d4a5895abb
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/AutobusScene.unity
     guid: b10d1e2349c2f6845a29f0ca04ea21b0
   - enabled: 1
     path: Assets/Scenes/ValkaScene.unity
