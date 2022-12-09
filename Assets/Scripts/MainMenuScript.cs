@@ -55,7 +55,6 @@ public class MainMenuScript : MonoBehaviour
         SwitchMenu(4);
         while (!operation.isDone){
             float progress = Mathf.Clamp01(operation.progress / .9f);
-            Debug.Log(progress);
             loadingBar.value = progress;
             yield return null;
         }

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!121 &12100000
+Flare:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: New Flare
+  m_FlareTexture: {fileID: 2800000, guid: dc62e4c38adf99f49931b597d433f64f, type: 3}
+  m_TextureLayout: 2
+  m_Elements:
+  - m_ImageIndex: 0
+    m_Position: 0.01
+    m_Size: 6.02
+    m_Color: {r: 0.6603774, g: 0.6012503, b: 0.53266287, a: 0}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 0
+  - m_ImageIndex: 0
+    m_Position: 0.8
+    m_Size: 21.08
+    m_Color: {r: 0.7924528, g: 0.42574918, b: 0, a: 1}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 0
+  - m_ImageIndex: 0
+    m_Position: 1.19
+    m_Size: 11.72
+    m_Color: {r: 0.6132076, g: 0.45758325, b: 0.2747864, a: 0}
+    m_UseLightColor: 0
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 0
+  m_UseFog: 0
