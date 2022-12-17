@@ -72,6 +72,8 @@ public class AutobusGameScript : GameLogicAbstract
                 MoveCard(ccs, deck_cas);
                 ccs.flipped = true;
             }
+            audioSource.Stop();
+            audioSource.PlayOneShot(cardSound);
             deck_cas.Shuffle();
             AddInitCard(dump_cas);
         }
@@ -85,9 +87,9 @@ public class AutobusGameScript : GameLogicAbstract
                     }
                 }
                 if (pack) {
-                    foreach (ClassicCardScript ccs in cas.cards) {
-                        MoveCard(ccs, deck_cas);
-                        ccs.flipped = true;
+                    List<ClassicCardScript> tempcards = cas.cards;
+                    foreach (ClassicCardScript ccs in tempcards) {
+                        MoveCard(ccs, deck_cas, true);
                     }
                     deck_cas.Shuffle();
                     cas.areaSymbol = ClassicCardObject.ccSymbol.NONE;
@@ -125,13 +127,13 @@ public class AutobusGameScript : GameLogicAbstract
         audioSource.Stop();
     }
 
-    public void ActionRequest(ClassicCardScript temp_ccs, int playerID) {
+    public void ActionRequest(ClassicCardScript target_ccs, int playerID) {
         if (playerID != playerTurn) return;
-        CardAreaScript temp_cas = temp_ccs.CardArea;
+        CardAreaScript temp_cas = target_ccs.CardArea;
 
         //if (hands_cass[playerTurn].cardCount == handMax && turnSection == 0) turnSection++;
 
-        print("card: " + temp_ccs.name + " in: " + temp_cas.name + " T" + turnSection + " P" + playerID); 
+        print("card: " + target_ccs.name + " in: " + temp_cas.name + " T" + turnSection + " P" + playerID); 
         switch (turnSection) {
             case 0: { // drawing cards to handMax
                 switch (temp_cas.areaType) {
@@ -149,15 +151,15 @@ public class AutobusGameScript : GameLogicAbstract
                 selectedCards.Clear();
                 switch (temp_cas.areaType){
                     case "hand": {
-                        temp_ccs.selected = true;
-                        selectedCards.Add(temp_ccs);
+                        target_ccs.selected = true;
+                        selectedCards.Add(target_ccs);
                         turnSection++;
                         break;
                     }
                     case "dump": {
-                        if (!((int)temp_ccs.Card_symbol == 0 && (int)temp_ccs.Card_color == 0)) {
-                            temp_ccs.selected = true;
-                            selectedCards.Add(temp_ccs);
+                        if (!((int)target_ccs.Card_symbol == 0 && (int)target_ccs.Card_color == 0)) {
+                            dump_cas.cards[dump_cas.cards.Count - 1].selected = true;
+                            selectedCards.Add(dump_cas.cards[dump_cas.cards.Count - 1]);
                             turnSection++;
                             break;
                         }
@@ -180,24 +182,24 @@ public class AutobusGameScript : GameLogicAbstract
                         if (selectedCards[0].CardArea.areaType == "bank" || selectedCards[0].CardArea.areaType == "dump") break;
                        
                         // unselect hand
-                        if (selectedCards.Contains(temp_ccs)) {
-                            temp_ccs.selected = false;
-                            selectedCards.Remove(temp_ccs);
+                        if (selectedCards.Contains(target_ccs)) {
+                            target_ccs.selected = false;
+                            selectedCards.Remove(target_ccs);
                             if (selectedCards.Count == 0) turnSection--;
                             break;
                         }
 
                         // select from hand (must be the same)
-                        else if (temp_ccs.Card_symbol == selectedCards[0].Card_symbol) {
-                            temp_ccs.selected = true;
-                            selectedCards.Add(temp_ccs);
+                        else if (target_ccs.Card_symbol == selectedCards[0].Card_symbol) {
+                            target_ccs.selected = true;
+                            selectedCards.Add(target_ccs);
                         }
                         break;
                     }
                     case "bank": {
                         if (selectedCards[0].CardArea.areaType == "bank") {
-                            temp_ccs.selected = false;
-                            selectedCards.Remove(temp_ccs);
+                            target_ccs.selected = false;
+                            selectedCards.Remove(target_ccs);
                             if (selectedCards.Count == 0) turnSection--;
                             break;
                         }
@@ -206,15 +208,15 @@ public class AutobusGameScript : GameLogicAbstract
                     case "table": { // playing cards
 
                         // no joker after king fix
-                        if (temp_cas.cardCount > 12) {
+                        if (temp_cas.cardCount > 12 && target_ccs.Card_value == ClassicCardObject.ccValue.JOKER) {
                             break;
                         }
 
                         // replace joker
-                        if (selectedCards.Count == 1 && (int)temp_ccs.Card_value == 13 && 
+                        if (selectedCards.Count == 1 && (int)target_ccs.Card_value == 13 && 
                         (temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
-                        (int)selectedCards[0].Card_value == temp_cas.cards.IndexOf(temp_ccs)) {
-                            SwapCards(selectedCards[0], temp_ccs);
+                        (int)selectedCards[0].Card_value == temp_cas.cards.IndexOf(target_ccs)) {
+                            SwapCards(selectedCards[0], target_ccs);
                             temp_cas.areaSymbol = selectedCards[0].Card_symbol;
                             turnSection--;
                             break;
@@ -223,23 +225,34 @@ public class AutobusGameScript : GameLogicAbstract
                         // multiple cards validation
                         if (selectedCards.Count > 1) {
                             selectedCards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
+                            List<ClassicCardScript> newSelect = new List<ClassicCardScript>();
                             int last = (int)selectedCards[0].Card_value;
+                            newSelect.Add(selectedCards[0]);
                             for(int i = 1; i < selectedCards.Count; i++) {
                                 if(last + 1 != (int)selectedCards[i].Card_value) {
-                                    for(int b = i; b < selectedCards.Count; b++) {
-                                        selectedCards[i].selected = false;
-                                    }
-                                    selectedCards.RemoveRange(i, selectedCards.Count - i);
                                     break;
                                 }
+                                newSelect.Add(selectedCards[i]);
                             }
+                            selectedCards = newSelect;
+                            // }
+                            // int last = (int)selectedCards[0].Card_value;
+                            // for(int i = 1; i < selectedCards.Count; i++) {
+                            //     if(last + 1 != (int)selectedCards[i].Card_value) {
+                            //         for(int b = i; b < selectedCards.Count; b++) {
+                            //             selectedCards[i].selected = false;
+                            //         }
+                            //         selectedCards.RemoveRange(i, selectedCards.Count - i);
+                            //         break;
+                            //     }
+                            // }
                         }
                         
                         // replace init card
-                        if (temp_cas.cards.Count == 1 && temp_ccs.Card_symbol == 0 && temp_ccs.Card_color == 0 &&
-                        ((int)selectedCards[0].Card_value == 0 || (int)selectedCards[0].Card_value == 13)) { // black hearts
+                        if (temp_cas.cards.Count == 1 && target_ccs.Card_symbol == 0 && target_ccs.Card_color == 0 &&
+                        (selectedCards[0].Card_value == ClassicCardObject.ccValue.ACE || (int)selectedCards[0].Card_value == 13)) { // black hearts
                             temp_cas.areaSymbol = selectedCards[0].Card_symbol;
-                            temp_cas.DeleteCard(temp_ccs);
+                            temp_cas.DeleteCard(target_ccs);
                             if (selectedCards[0].CardArea.areaType == "bank") {
                                 banks_cass[playerID].cards[banks_cass[playerID].cards.Count - 2].flipped = false;
                             }
@@ -250,9 +263,8 @@ public class AutobusGameScript : GameLogicAbstract
                             turnSection--;
                             break;
                         }
-                        if (temp_cas.cards.Count == 1 && temp_ccs.Card_symbol == 0 && temp_ccs.Card_color == 0) {
-                            break;
-                        }
+
+                        // what does this do?? if has the same symbol || or empty and the same count as value wtf || is joker
                         if ((temp_cas.areaSymbol == selectedCards[0].Card_symbol || temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) &&
                         temp_cas.cards.Count == (int)selectedCards[0].Card_value || (int)selectedCards[0].Card_value == 13) {
                             if (temp_cas.areaSymbol == ClassicCardObject.ccSymbol.NONE) {
@@ -271,9 +283,9 @@ public class AutobusGameScript : GameLogicAbstract
                         break;
                     }
                     case "dump": {
-                        if (selectedCards.Contains(temp_ccs)) {
-                            temp_ccs.selected = false;
-                            selectedCards.Remove(temp_ccs);
+                        if (selectedCards.Contains(target_ccs)) {
+                            target_ccs.selected = false;
+                            selectedCards.Remove(target_ccs);
                             if (selectedCards.Count == 0) turnSection--;
                             break;
                         }
@@ -281,6 +293,9 @@ public class AutobusGameScript : GameLogicAbstract
                             break;
                         }
                         if (selectedCards.Count == 1 && hands_cass[playerID].cardCount >= handMax) {
+                            if((int)deck_cas.cards[0].Card_symbol == 0 && (int)deck_cas.cards[0].Card_color == 0){
+                                deck_cas.DeleteCard(deck_cas.cards[0]);
+                            }
                             MoveCard(selectedCards[0], temp_cas);
                             NewPlayer();
                             break;
