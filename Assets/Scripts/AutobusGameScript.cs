@@ -246,6 +246,7 @@ public class AutobusGameScript : GameLogicAbstract
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
                             }
+                            selectedCards = new List<ClassicCardScript>();
                             turnSection--;
                             break;
                         }
@@ -263,6 +264,7 @@ public class AutobusGameScript : GameLogicAbstract
                             foreach (ClassicCardScript cardToMove in selectedCards) {
                                 MoveCard(cardToMove, temp_cas);
                             }
+                            selectedCards = new List<ClassicCardScript>();
                             turnSection--;
                             break;
                         }
@@ -301,6 +303,7 @@ public class AutobusGameScript : GameLogicAbstract
     }
 
     public void EndTurn(int playerID) {
+        Debug.Log(hands_cass[playerID].cardCount.ToString() + " " + selectedCards.Count.ToString());
         if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax && selectedCards.Count == 0) {
             NewPlayer();
         }

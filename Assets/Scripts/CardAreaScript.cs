@@ -147,21 +147,16 @@ public class CardAreaScript : MonoBehaviour
     }
 
     public void Shuffle () {
-        cards.Sort(
-            (x, y) => {
-                float xr = Random.Range(0, 100);
-                float yr = Random.Range(0, 100);
-                return xr < yr ? -1 : xr == yr ? 0 : 1;
-            }
-        );
-        // for (int i = 0; i < cardCount; i++) {
-        //     ClassicCardScript temp = cards[i];
-        //     int randomIndex = Random.Range(i, cardCount);
-        //     cards[i] = cards[randomIndex];
-        //     cards[randomIndex] = temp;
-        // }
-    }   
-
+        int n = cards.Count;
+        while (n > 1) {
+            int k = ((int)Random.Range(0, n) % n);
+            n--;
+            ClassicCardScript value = cards[k];
+            cards[k] = cards[n];
+            cards[n] = value;
+        }
+    }
+    
     public void DeleteCard (ClassicCardScript card) {
         cards.Remove(card);
         Destroy(card.gameObject);
