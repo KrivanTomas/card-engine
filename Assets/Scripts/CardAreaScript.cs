@@ -134,6 +134,10 @@ public class CardAreaScript : MonoBehaviour
         }
     }
 
+    public void Recalculate(){
+        cardCount = cards.Count;
+    }
+
     public void SortCards() {
         cards.Sort((x, y) => {
             ClassicCardObject.ccValue xv = x.Card_value;

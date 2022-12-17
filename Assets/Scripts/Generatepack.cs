@@ -56,5 +56,6 @@ public class Generatepack : MonoBehaviour
         if (shuffle) {
             cas.Shuffle();
         }
+        cas.Recalculate();
     }
 }
