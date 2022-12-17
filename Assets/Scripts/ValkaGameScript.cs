@@ -15,6 +15,7 @@ public class ValkaGameScript : GameLogicAbstract
     int playerCount = 2;
     //int playerTurn = 0;
 
+    public bool debugAC = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,19 +26,34 @@ public class ValkaGameScript : GameLogicAbstract
     // Update is called once per frame
     void Update()
     {
-        if(handArea[0].cards.Count == 0 || handArea[1].cards.Count == 0){
-            print("The round has ended.");
+        if(handArea[0].cards.Count <= 0){
+            Debug.Log("Player 1 wins.");
             StartGame();
         }
+        else if(handArea[1].cards.Count <= 0){
+            Debug.Log("Player 0 wins.");
+            StartGame();
+        }
+        if(debugAC){
+            DebugAutoClicker();
+        }
+    }
+
+    public void DebugAutoClicker(){
+        Action(handArea[0].cards[handArea[0].cards.Count-1], 0);
+        Action(gameArea[0].cards[gameArea[0].cards.Count-1], 0);
     }
 
     public void StartGame()
     {
+        foreach(ClassicCardScript card in handArea[0].cards) {
+            Destroy(card.gameObject);
+        }
+        foreach(ClassicCardScript card in handArea[1].cards) {
+            Destroy(card.gameObject);
+        }
         handArea[0].cards.Clear();
         handArea[1].cards.Clear();
-        for(int i = 0; i < gen.cardHideaway.GetComponent<Transform>().childCount-1; i++){
-            Destroy(gen.cardHideaway.GetComponent<Transform>().GetChild(i).gameObject);
-        }
 
         for(int i = 0; i < playerCount; i++){
             handArea[i].ownershipID = i;
@@ -82,11 +98,9 @@ public class ValkaGameScript : GameLogicAbstract
 
         if(value1 > value2){
             CollectCards(0);
-            print("player1 wins");
         }
         else if(value1 < value2){
             CollectCards(1);
-            print("player2 wins");
         }
         else {
             for(int i = 0; i < 3; i++){
@@ -97,10 +111,20 @@ public class ValkaGameScript : GameLogicAbstract
 
     private void Draw() //draws a card from hand area and places it onto the game area, with the enemy doing the same
     {
-        MoveCard(handArea[0].cards[handArea[0].cards.Count-1], gameArea[0], false);
+        if (handArea[0].cards.Count != 0){
+            MoveCard(handArea[0].cards[handArea[0].cards.Count-1], gameArea[0], false);
+        }
+        else{
+            MoveCard(handArea[1].cards[handArea[1].cards.Count-1], gameArea[0], false);
+        } 
         gameArea[0].totalStacking = gameArea[0].cards.Count * 0.0218f;
 
-        MoveCard(handArea[1].cards[handArea[1].cards.Count-1], gameArea[1], false); //bot
+        if (handArea[1].cards.Count != 0){ // bot
+            MoveCard(handArea[1].cards[handArea[1].cards.Count-1], gameArea[1], false);
+        }
+        else{
+            MoveCard(handArea[0].cards[handArea[0].cards.Count-1], gameArea[1], false);
+        }
         gameArea[1].totalStacking = gameArea[1].cards.Count * 0.0218f;
     }
 
