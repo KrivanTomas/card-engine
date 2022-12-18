@@ -45,11 +45,44 @@ public class AutobusGameScript : GameLogicAbstract
         }
         deck.GetComponent<Generatepack>().Generate();
         StartGame();
+        OnTurnUpdate();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    // potential bugs:
+    // more than 2 card areas with a symbol
+
+    private void StartGame() {
+        playerTurn = 0;
+        turnSection = 0;
+        foreach(CardAreaScript cas in hands_cass) {
+            for (int i = 0; i < handMax; i++)
+            {
+                DrawCardFromDeck(deck_cas, cas);
+            }
+            cas.SortCards();
+            turnSection++;
+        }
+        foreach(CardAreaScript cas in banks_cass) {
+            for (int i = 0; i < bankMax; i++)
+            {
+                if (i < bankMax - 1) DrawCardFromDeck(deck_cas, cas, true);
+                else DrawCardFromDeck(deck_cas, cas, false);
+            }
+        }
+        foreach(CardAreaScript cas in tables_cass) {
+            AddInitCard(cas);
+        }
+        AddInitCard(dump_cas);
+        audioSource.Stop();
+    }
+
+    private void OnTurnUpdate() {
         switch (turnSection){
             case 0: {
                 textMeshProUGUI.text = "Draw cards";
@@ -87,7 +120,7 @@ public class AutobusGameScript : GameLogicAbstract
                     }
                 }
                 if (pack) {
-                    List<ClassicCardScript> tempcards = cas.cards;
+                    List<ClassicCardScript> tempcards = new List<ClassicCardScript>(cas.cards);
                     foreach (ClassicCardScript ccs in tempcards) {
                         MoveCard(ccs, deck_cas, true);
                     }
@@ -99,41 +132,13 @@ public class AutobusGameScript : GameLogicAbstract
         }
     }
 
-    // potential bugs:
-    // more than 2 card areas with a symbol
-
-    private void StartGame() {
-        playerTurn = 0;
-        turnSection = 0;
-        foreach(CardAreaScript cas in hands_cass) {
-            for (int i = 0; i < handMax; i++)
-            {
-                DrawCardFromDeck(deck_cas, cas);
-            }
-            cas.SortCards();
-            turnSection++;
-        }
-        foreach(CardAreaScript cas in banks_cass) {
-            for (int i = 0; i < bankMax; i++)
-            {
-                if (i < bankMax - 1) DrawCardFromDeck(deck_cas, cas, true);
-                else DrawCardFromDeck(deck_cas, cas, false);
-            }
-        }
-        foreach(CardAreaScript cas in tables_cass) {
-            AddInitCard(cas);
-        }
-        AddInitCard(dump_cas);
-        audioSource.Stop();
-    }
-
     public void ActionRequest(ClassicCardScript target_ccs, int playerID) {
         if (playerID != playerTurn) return;
         CardAreaScript temp_cas = target_ccs.CardArea;
 
         //if (hands_cass[playerTurn].cardCount == handMax && turnSection == 0) turnSection++;
 
-        print("card: " + target_ccs.name + " in: " + temp_cas.name + " T" + turnSection + " P" + playerID); 
+        Debug.Log("card: " + target_ccs.name + " in: " + temp_cas.name + " T" + turnSection + " P" + playerID); 
         switch (turnSection) {
             case 0: { // drawing cards to handMax
                 switch (temp_cas.areaType) {
@@ -142,6 +147,7 @@ public class AutobusGameScript : GameLogicAbstract
                         if (hands_cass[playerTurn].cardCount == handMax - 1) { // don't know why it has to be -1 ¯\_(ツ)_/¯
                             turnSection++;
                         }
+                        OnTurnUpdate();
                         break;
                     }
                 }
@@ -208,7 +214,7 @@ public class AutobusGameScript : GameLogicAbstract
                     case "table": { // playing cards
 
                         // no joker after king fix
-                        if (temp_cas.cardCount > 12 && target_ccs.Card_value == ClassicCardObject.ccValue.JOKER) {
+                        if (temp_cas.cardCount > 12 && target_ccs.Card_value != ClassicCardObject.ccValue.JOKER) {
                             break;
                         }
 
@@ -225,27 +231,17 @@ public class AutobusGameScript : GameLogicAbstract
                         // multiple cards validation
                         if (selectedCards.Count > 1) {
                             selectedCards.Sort((x, y) => {return x.Card_value < y.Card_value ? -1 : x.Card_value == y.Card_value ? 0 : 1;});
-                            List<ClassicCardScript> newSelect = new List<ClassicCardScript>();
                             int last = (int)selectedCards[0].Card_value;
-                            newSelect.Add(selectedCards[0]);
                             for(int i = 1; i < selectedCards.Count; i++) {
                                 if(last + 1 != (int)selectedCards[i].Card_value) {
+                                    for(int b = i; b < selectedCards.Count; b++) {
+                                        selectedCards[i].selected = false;
+                                    }
+                                    selectedCards.RemoveRange(i, selectedCards.Count - 1);
                                     break;
                                 }
-                                newSelect.Add(selectedCards[i]);
+                                last = (int)selectedCards[i].Card_value;
                             }
-                            selectedCards = newSelect;
-                            // }
-                            // int last = (int)selectedCards[0].Card_value;
-                            // for(int i = 1; i < selectedCards.Count; i++) {
-                            //     if(last + 1 != (int)selectedCards[i].Card_value) {
-                            //         for(int b = i; b < selectedCards.Count; b++) {
-                            //             selectedCards[i].selected = false;
-                            //         }
-                            //         selectedCards.RemoveRange(i, selectedCards.Count - i);
-                            //         break;
-                            //     }
-                            // }
                         }
                         
                         // replace init card
@@ -293,10 +289,11 @@ public class AutobusGameScript : GameLogicAbstract
                             break;
                         }
                         if (selectedCards.Count == 1 && hands_cass[playerID].cardCount >= handMax) {
-                            if((int)deck_cas.cards[0].Card_symbol == 0 && (int)deck_cas.cards[0].Card_color == 0){
-                                deck_cas.DeleteCard(deck_cas.cards[0]);
+                            if((int)dump_cas.cards[0].Card_symbol == 0 && (int)dump_cas.cards[0].Card_color == 0){
+                                dump_cas.DeleteCard(dump_cas.cards[0]);
                             }
                             MoveCard(selectedCards[0], temp_cas);
+                            selectedCards = new List<ClassicCardScript>();
                             NewPlayer();
                             break;
                         }
@@ -315,12 +312,14 @@ public class AutobusGameScript : GameLogicAbstract
             //     break;
             // }
         }
+        OnTurnUpdate();
     }
 
     public void EndTurn(int playerID) {
         Debug.Log(hands_cass[playerID].cardCount.ToString() + " " + selectedCards.Count.ToString());
         if(playerID == playerTurn && hands_cass[playerID].cardCount < handMax && selectedCards.Count == 0) {
             NewPlayer();
+            OnTurnUpdate();
         }
     }
 
@@ -330,6 +329,7 @@ public class AutobusGameScript : GameLogicAbstract
             playerTurn = 0;
         }
         turnSection = 0;
+        selectedCards = new List<ClassicCardScript>();
     }
 
     private void AddInitCard (CardAreaScript target) {

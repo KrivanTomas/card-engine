@@ -187,6 +187,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: AutobusGame
       objectReference: {fileID: 0}
+    - target: {fileID: 3249502882159480569, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.226
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249502882447970737, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.381
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249502882951048785, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.363
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249502882951048785, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.057
+      objectReference: {fileID: 0}
+    - target: {fileID: 3249502883296072293, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.074000016
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f4ac2d897aebfd408b88d281231a8d3, type: 3}
 --- !u!1001 &3908669490900908227
@@ -196,6 +216,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3908669489517483451, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669489517483451, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669489517483451, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669489742656533, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.136
+      objectReference: {fileID: 0}
     - target: {fileID: 3908669489810327141, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -207,6 +243,18 @@ PrefabInstance:
     - target: {fileID: 3908669489810327141, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669489889393327, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 21.300049
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669490115037810, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669490149775756, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.22
       objectReference: {fileID: 0}
     - target: {fileID: 3908669490226566392, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_RootOrder
@@ -268,10 +316,22 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3908669490291435554, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.158
+      objectReference: {fileID: 0}
+    - target: {fileID: 3908669490400804844, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: viewPosition.z
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 3908669490400804845, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: gameLogic
       value: 
       objectReference: {fileID: 713237303}
+    - target: {fileID: 3908669490723692191, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.22399992
+      objectReference: {fileID: 0}
     - target: {fileID: 3908669490950783706, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_IsActive
       value: 0
