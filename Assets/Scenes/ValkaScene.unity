@@ -135,6 +135,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 19516318946388906, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_text
+      value: "When a round begins, each player has to click the deck in their hand,\r\nwhich
+        draws one card from the top. \r\nIf all players have drawn their card, anyone
+        can click on a card,\r\nresulting in the winner collecting all drawn cards.\r\n\r\nThe
+        winner is determined by the value of their card. Ace is 1, joker is 14.\r\n\r\nIf
+        a tie occurs, every affected player draws 3 more cards, the third card\r\ndetermines
+        the round winner. Ties have no limit. If one player doesn't have\r\nenough
+        cards to put out for a tie, the next player draws for them.\r\nThis does
+        not apply for a player who has no cards to begin a round with.\r\n\r\nThe
+        game lasts until one player has all the cards in their hand deck."
+      objectReference: {fileID: 0}
+    - target: {fileID: 499410636022021513, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 499410636022021513, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457518473892686196, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457518473892686196, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457518473892686196, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1457518473892686196, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021306826634447535, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2021306826634447535, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301666071184795483, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_text
+      value: "How to play - V\xE1lka (War)"
+      objectReference: {fileID: 0}
     - target: {fileID: 3409533700071740304, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: corsshair
       value: 
@@ -247,9 +295,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.383
       objectReference: {fileID: 0}
+    - target: {fileID: 3908669490950783706, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7338261153968861541, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_Name
       value: BasicAssets
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400959208757223061, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400959208757223061, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7484311046422706147, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_RootOrder
@@ -294,6 +354,18 @@ PrefabInstance:
     - target: {fileID: 7484311046422706147, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961598508500654638, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961598508500654638, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7961598508500654638, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.36889905
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17e5a9fbedb062c4abaf1cb1292f2cac, type: 3}
